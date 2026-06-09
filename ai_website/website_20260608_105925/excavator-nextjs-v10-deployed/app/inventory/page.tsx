@@ -1,0 +1,1 @@
+export default function Inventory(){return <main><h1>Inventory - 50 Machines</h1></main>}

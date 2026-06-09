@@ -1,0 +1,52 @@
+[
+  {
+    "id": "BLOG001",
+    "slug": "how-to-inspect-used-excavator",
+    "title": "How to Inspect a Used Excavator: A Complete Buyer's Guide",
+    "date": "June 5, 2026",
+    "summary": "Essential inspection steps to verify hydraulic pumps, engine health, and track wear before purchasing a used excavator.",
+    "author": "Robert Chen (Senior Equipment Inspector)",
+    "image": "/images/blog1.webp",
+    "content": "Purchasing a used excavator can save your company up to 60% compared to buying new, but only if you avoid a 'lemon'. As a heavy machinery inspector with 15 years of experience, here is my definitive 4-step inspection checklist: 1. Test the Hydraulics: Start the engine, run it at full throttle, and perform full cylinder extensions. Listen for unusual whining noises from the main pump and check for jerky movements. 2. Inspect the Engine: Look for oil leaks around the head gasket and inspect the exhaust smoke. Blue smoke indicates burning oil, black smoke indicates fuel system issues, and white smoke means coolant is leaking into the combustion chamber. 3. Evaluate the Undercarriage: Undercarriage replacement can cost thousands. Measure the wear on the track links, rollers, and sprockets. Check if the track tension is properly adjusted. 4. Check for Play and Cracks: Inspect the boom and arm welds for stress cracks. Wiggle the bucket to check the pin and bushing play. Excessive play means they need immediate replacement."
+  },
+  {
+    "id": "BLOG002",
+    "slug": "top-excavator-brands-comparison",
+    "title": "Caterpillar vs Komatsu vs Sany: Which Excavator Brand Suits Your Project?",
+    "date": "May 28, 2026",
+    "summary": "An in-depth analysis of the strengths, pricing, and performance of the world's leading heavy excavator manufacturers.",
+    "author": "Marcus Vance (Machinery Export Director)",
+    "image": "/images/blog2.webp",
+    "content": "Choosing the right brand for your imported excavator depends heavily on your local dealer support, parts availability, and project nature. Here is how the top three brands compare: Caterpillar (CAT) is the undisputed king of durability and resale value. CAT excavators have incredibly robust hydraulic systems and comfortable cabins, making them perfect for high-intensity, heavy-duty mining and quarry works. However, parts can be expensive. Komatsu offers exceptional precision and fuel efficiency. Their electronics and pump-matching systems are superior, making Komatsu the favorite for fine-grading and infrastructure projects. Sany has risen rapidly to become a global B2B favorite due to its extreme cost-performance ratio. Sany machines are highly reliable, use world-class Mitsubishi or Isuzu engines, and cost about 20-30% less than Western brands, making them highly profitable for medium-scale contractors."
+  },
+  {
+    "id": "BLOG003",
+    "slug": "shipping-heavy-machinery-globally",
+    "title": "Sailing Safely: How We Pack and Ship Heavy Machinery Globally",
+    "date": "May 15, 2026",
+    "summary": "Discover the maritime logistics behind heavy equipment export, from container lashing to Flat Rack and RoRo shipping options.",
+    "author": "Captain Frank Wu (Logistics Coordinator)",
+    "image": "/images/blog3.webp",
+    "content": "Shipping a 20-ton excavator across oceans requires precise planning to prevent damage from saltwater corrosion and maritime motion. There are three main methods we use to ship excavators worldwide: 1. Container Shipping: For mini excavators under 6 tons, we can fit them into standard 20ft or 40ft containers. This is the most secure and cost-effective method. 2. Flat Rack (FR) Containers: For 20-ton class excavators like the CAT 320D or Sany SY215, we dismantle the arm and bucket, drive the machine onto a flat rack container, and lash it with heavy-duty steel wire ropes. This method is highly flexible and integrates perfectly with global container liners. 3. Roll-on/Roll-off (RoRo) Shipping: For large-scale projects, we drive the excavator directly onto the enclosed deck of a specialized RoRo vessel. This offers the best protection from sea spray, though it is only available at major commercial ports."
+  },
+  {
+    "id": "BLOG004",
+    "slug": "extend-excavator-undercarriage-life",
+    "title": "Undercarriage Maintenance: 5 Tips to Double Your Excavator Track Life",
+    "date": "April 30, 2026",
+    "summary": "Maximize your ROI by keeping your excavator's most expensive wear component in top-tier condition with these simple habits.",
+    "author": "Dieter Schmidt (Service Engineering Lead)",
+    "image": "/images/blog4.webp",
+    "content": "The undercarriage represents up to 50% of an excavator's ongoing maintenance costs. By implementing these five simple habits, you can significantly extend its service life: 1. Keep the Undercarriage Clean: Mud, clay, and rocks packed into the tracks accelerate roller and sprocket wear. Clean the tracks daily using a shovel or high-pressure washer. 2. Maintain Proper Track Tension: Loose tracks can slip off, while tight tracks create excessive friction on links and bushings, causing rapid wear and power loss. Refer to your operator's manual for exact tension specs. 3. Avoid High-Speed Travel: Excessive traveling, especially on hard asphalt or concrete surfaces, generates heat and causes accelerated steel wear. Use low-speed mode whenever possible. 4. Minimize Reverse Operations: Traveling in reverse forces the track pins to rotate against the sprocket under load, doubling the wear rate compared to forward travel. 5. Make Wider Turns: Sharp, pivot turns wear out track shoes and links rapidly. Opt for wide, gradual turns to minimize lateral stress."
+  },
+  {
+    "id": "BLOG005",
+    "slug": "mini-vs-medium-excavators",
+    "title": "Mini Excavators vs Medium Excavators: Choosing the Right Tonnage",
+    "date": "April 12, 2026",
+    "summary": "A comparison guide helping you decide between compact highly versatile diggers and heavy-duty earthmovers.",
+    "author": "Alan Thompson (Civil Engineering Advisor)",
+    "image": "/images/blog5.webp",
+    "content": "Tonnage is the first decision you must make when importing an excavator. Getting it wrong can lead to underpowered performance or wasted fuel. Here is how to choose between Mini and Medium excavators: Mini Excavators (1 to 6 Tons) like the Kubota KX155 are highly versatile, agile, and operate perfectly in confined residential areas, farms, and urban utilities. They are light enough to be transported on a standard utility trailer and have rubber tracks that won't damage concrete pavements. Medium Excavators (13 to 25 Tons) like the CAT 320D or Komatsu PC200 are the workhorses of the construction industry. They are designed for large-scale earthmoving, deep trenching, road building, and pipeline laying. If your project involves digging deeper than 4 meters or lifting heavy pipe blocks, a medium excavator is absolutely mandatory."
+  }
+]
