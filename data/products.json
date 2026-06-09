@@ -222,5 +222,21 @@
     "bucketCapacity": "1.0 m³",
     "undercarriage": "95% New",
     "image": "/images/used-komatsu-pc220-excavator-95-new.png"
+  },
+  {
+    "id": "DOO015",
+    "slug": "used-doosan-dx300lc-excavator",
+    "model": "Doosan DX300LC (Standard)",
+    "brand": "Doosan",
+    "price": 65000,
+    "year": 2019,
+    "hours": 1400,
+    "weight": "30 Tons",
+    "condition": "Outstanding 95% new condition, ready to work immediately, pristine cabin interior, original Doosan main pump and hydraulic valves, 100% load tested.",
+    "engine": "Doosan DL08",
+    "power": "147 kW (197 HP)",
+    "bucketCapacity": "1.4 m³",
+    "undercarriage": "95% New",
+    "image": "/images/used-doosan-dx300lc-excavator-95-new.png"
   }
 ]
