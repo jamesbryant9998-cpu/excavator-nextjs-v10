@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 import Link from "next/navigation";
-import { ShieldCheck, Anchor, HardHat, CheckCircle2, Phone, Mail, Award, ArrowRight, HelpCircle } from "lucide-react";
+import { ShieldCheck, Anchor, HardHat, CheckCircle2, Phone, Mail, Award, ArrowRight, HelpCircle, BookOpen } from "lucide-react";
 import productsData from "../data/products.json";
+import guidesData from "../data/guides.json";
 
 export default function Page() {
   const [selectedBrand, setSelectedBrand] = useState("All");
@@ -225,6 +226,53 @@ export default function Page() {
             <span>Request Custom Sourcing Quote</span>
             <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
           </a>
+        </div>
+      </section>
+
+      {/* Buyers Guide Section */}
+      <section className="py-20 border-t border-gray-950 max-w-7xl mx-auto px-4">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+          <div className="space-y-4 max-w-2xl text-left">
+            <span className="inline-flex items-center space-x-1.5 bg-amber-500/10 border border-amber-500/20 px-3 py-1.5 rounded-full text-amber-500 text-xs font-bold tracking-wide uppercase">
+              <BookOpen size={14} />
+              <span>Expert Knowledge Library</span>
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight">
+              Heavy Equipment <span className="text-amber-500">Buyer Guides</span>
+            </h2>
+            <p className="text-gray-400 text-sm leading-relaxed">
+              Understand inspect rules, price depreciation mapping, container shipping methods, and brand comparisons before you place a machinery order.
+            </p>
+          </div>
+          <div className="text-left md:text-right">
+            <a href="#products" className="text-sm text-amber-500 hover:text-amber-400 font-extrabold tracking-wide inline-flex items-center group">
+              <span>View All Inventory</span>
+              <ArrowRight size={16} className="ml-2 group-hover:translate-x-1 transition-transform" />
+            </a>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {guidesData.map((g) => (
+            <div key={g.slug} className="bg-[#111625]/60 border border-gray-800/80 hover:border-gray-700/80 rounded-2xl p-6 flex flex-col justify-between transition-all hover:-translate-y-0.5 shadow-lg group">
+              <div className="space-y-3">
+                <span className="text-amber-500 text-[10px] font-extrabold tracking-widest uppercase block">
+                  {g.category}
+                </span>
+                <h3 className="text-lg font-black text-white group-hover:text-amber-500 transition-colors duration-300">
+                  {g.title}
+                </h3>
+                <p className="text-gray-400 text-xs leading-relaxed line-clamp-3">
+                  {g.shortDesc}
+                </p>
+              </div>
+              <div className="pt-6 border-t border-gray-900/50 mt-5">
+                <Link href={`/guides/${g.slug}`} className="text-amber-500 hover:text-amber-400 text-xs font-extrabold tracking-wider uppercase inline-flex items-center group/btn">
+                  <span>{g.actionText}</span>
+                </Link>
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 
