@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/navigation";
+import Link from "next/link";
 import { ShieldCheck, Anchor, HardHat, CheckCircle2, Phone, Mail, Award, ArrowRight, HelpCircle, BookOpen } from "lucide-react";
 import productsData from "../data/products.json";
 import guidesData from "../data/guides.json";
