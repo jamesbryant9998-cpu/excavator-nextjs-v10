@@ -1,12 +1,20 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/navigation";
 import { ShieldCheck, Anchor, HardHat, CheckCircle2, Phone, Mail, Award, ArrowRight, HelpCircle } from "lucide-react";
 import productsData from "../data/products.json";
 
 export default function Page() {
-  // Select top 3 products as featured
-  const featuredProducts = productsData.slice(0, 3);
+  const [selectedBrand, setSelectedBrand] = useState("All");
+
+  // Get unique brands
+  const brands = ["All", ...Array.from(new Set(productsData.map((p) => p.brand)))];
+
+  // Filter products based on selected brand
+  const filteredProducts = selectedBrand === "All" 
+    ? productsData 
+    : productsData.filter((p) => p.brand === selectedBrand);
 
   return (
     <div className="bg-[#0b0f19]">
@@ -150,19 +158,36 @@ export default function Page() {
         </div>
       </section>
 
-      {/* Featured Products Grid */}
-      <section className="py-20 max-w-7xl mx-auto px-4">
+      {/* Product Inventory Section */}
+      <section id="products" className="py-20 max-w-7xl mx-auto px-4">
         <div className="text-center space-y-4 mb-12">
           <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight">
-            Featured <span className="text-amber-500">Premium Inventory</span>
+            Our Excavator <span className="text-amber-500">Product Inventory</span>
           </h2>
           <p className="text-gray-400 max-w-xl mx-auto text-sm">
-            Strictly hand-selected heavy excavators. Excellent maintenance history, fully tested for hydraulic pressure, valve response and structural integrity.
+            Browse our full range of pre-owned machinery. All machines are certified, load-tested, and ready for immediate global export.
           </p>
+
+          {/* Brand Filter Buttons */}
+          <div className="flex flex-wrap justify-center gap-2 pt-4">
+            {brands.map((brand) => (
+              <button
+                key={brand}
+                onClick={() => setSelectedBrand(brand)}
+                className={`px-4 py-2 rounded-xl text-xs font-extrabold tracking-wider uppercase transition-all border ${
+                  selectedBrand === brand
+                    ? "bg-amber-500 border-amber-500 text-black shadow-lg shadow-amber-500/10"
+                    : "bg-[#111625] border-gray-800 text-gray-400 hover:border-gray-700 hover:text-white"
+                }`}
+              >
+                {brand}
+              </button>
+            ))}
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {featuredProducts.map((p) => (
+          {filteredProducts.map((p) => (
             <div key={p.id} className="bg-[#111625] border border-gray-800/80 hover:border-gray-700 rounded-2xl overflow-hidden group transition-all hover:-translate-y-1 shadow-xl hover:shadow-2xl hover:shadow-amber-500/5">
               <div className="relative h-48 sm:h-52 bg-gray-900 overflow-hidden">
                 <img 
