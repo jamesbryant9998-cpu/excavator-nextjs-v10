@@ -1,13 +1,16 @@
-"use client";
-
-import { useParams } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, BookOpen, Clock, Calendar, ShieldCheck, Mail, Phone, ChevronRight } from "lucide-react";
+import { ArrowLeft, BookOpen, Clock, Calendar, ShieldCheck, ChevronRight } from "lucide-react";
 import guidesData from "../../../data/guides.json";
 
-export default function GuideDetailPage() {
-  const params = useParams();
-  const slug = params?.slug;
+// For static HTML export compatibility in Next.js App Router
+export async function generateStaticParams() {
+  return guidesData.map((g) => ({
+    slug: g.slug,
+  }));
+}
+
+export default function GuideDetailPage({ params }: { params: { slug: string } }) {
+  const { slug } = params;
 
   const guide = guidesData.find((g) => g.slug === slug);
 
