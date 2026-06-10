@@ -33,8 +33,32 @@ export default function Product({ params }: PageProps) {
     );
   }
 
+  const jsonLd = {
+    "@context": "https://schema.org/",
+    "@type": "Product",
+    "name": product.model,
+    "image": `https://excavator-nextjs-v10-jamesbryant9998-3760s-projects.vercel.app${product.image}`,
+    "description": product.condition,
+    "brand": {
+      "@type": "Brand",
+      "name": product.brand
+    },
+    "offers": {
+      "@type": "Offer",
+      "priceCurrency": "USD",
+      "price": product.price > 0 ? product.price : "Contact for Quote",
+      "itemCondition": "https://schema.org/UsedCondition",
+      "availability": "https://schema.org/InStock",
+      "url": `https://excavator-nextjs-v10-jamesbryant9998-3760s-projects.vercel.app/products/${product.slug}`
+    }
+  };
+
   return (
     <div className="bg-[#0b0f19] py-12">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <div className="max-w-7xl mx-auto px-4 space-y-8">
         
         {/* Breadcrumbs & Back Link */}
