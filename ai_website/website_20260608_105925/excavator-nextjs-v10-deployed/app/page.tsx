@@ -1,1 +1,0 @@
-export default function Page(){return <main><h1>Used Excavators Global Export</h1></main>}

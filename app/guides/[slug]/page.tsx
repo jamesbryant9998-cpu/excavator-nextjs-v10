@@ -1,223 +1,120 @@
-import Link from 'next/link';
-import { ArrowLeft, Calendar, Tag, ChevronRight, Clock, ShieldCheck, CheckCircle } from 'lucide-react';
-import Header from '../../../components/Header';
-import FloatingContact from '../../../components/FloatingContact';
-import guidesData from '../../../data/guides.json';
-import { notFound } from 'next/navigation';
+import Link from "next/link";
+import { ArrowLeft, BookOpen, Clock, Calendar, ShieldCheck, ChevronRight } from "lucide-react";
+import guidesData from "../../../data/guides.json";
 
-interface PageProps {
-  params: {
-    slug: string;
-  };
-}
-
-// Generate static routes for Next.js build compilation
+// For static HTML export compatibility in Next.js App Router
 export async function generateStaticParams() {
   return guidesData.map((g) => ({
     slug: g.slug,
   }));
 }
 
-export default function GuideDetailPage({ params }: PageProps) {
+export default function GuideDetailPage({ params }: { params: { slug: string } }) {
   const { slug } = params;
+
   const guide = guidesData.find((g) => g.slug === slug);
 
   if (!guide) {
-    notFound();
+    return (
+      <div className="min-h-screen bg-[#0b0f19] flex flex-col justify-center items-center text-center px-4">
+        <h1 className="text-4xl font-black text-white">404</h1>
+        <p className="text-gray-400 mt-2">Guide article not found.</p>
+        <Link href="/" className="mt-6 text-amber-500 font-bold hover:underline inline-flex items-center">
+          <ArrowLeft size={16} className="mr-2" /> Back to Home
+        </Link>
+      </div>
+    );
   }
 
-  // Get other recommended guides
-  const recommendations = guidesData
-    .filter((g) => g.slug !== slug)
-    .slice(0, 3);
+  // Filter other guides as recommendations
+  const otherGuides = guidesData.filter((g) => g.slug !== slug).slice(0, 3);
 
   return (
-    <main style={{ minHeight: '100vh', position: 'relative', backgroundColor: '#050505', color: '#fff', paddingTop: '120px' }}>
-      <Header />
-
-      {/* Breadcrumb Bar */}
-      <div style={{ borderBottom: '1px solid rgba(212, 175, 55, 0.08)', padding: '16px 0' }}>
-        <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px', display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.82rem', color: '#666' }}>
-          <a href="/" style={{ color: '#666', textDecoration: 'none' }}>Home</a>
-          <ChevronRight size={12} />
-          <span style={{ color: '#666' }}>Guides</span>
-          <ChevronRight size={12} />
-          <span style={{ color: '#d4af37' }}>{guide.title}</span>
+    <div className="min-h-screen bg-[#0b0f19] text-gray-300">
+      {/* Article Navigation Header */}
+      <div className="border-b border-gray-900 bg-gray-950/40 backdrop-blur-sm sticky top-0 z-30">
+        <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+          <Link href="/" className="text-xs font-bold text-gray-400 hover:text-amber-500 inline-flex items-center transition-colors">
+            <ArrowLeft size={14} className="mr-1.5" /> Back to Home
+          </Link>
+          <span className="text-xs font-black tracking-widest text-amber-500 uppercase">
+            HEAVYEXPO Buyer Guides
+          </span>
         </div>
       </div>
 
-      <article style={{ padding: '60px 0 80px' }}>
-        <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px' }}>
-          <div className="news-detail-grid">
-            {/* Left: Main Content Column */}
-            <div className="news-detail-main">
-              {/* Category & Date */}
-              <div style={{ display: 'flex', gap: '20px', alignItems: 'center', marginBottom: '20px', flexWrap: 'wrap' }}>
-                <span style={{
-                  backgroundColor: 'rgba(212, 175, 55, 0.08)',
-                  border: '1px solid rgba(212, 175, 55, 0.2)',
-                  color: '#d4af37',
-                  fontSize: '0.78rem',
-                  fontWeight: 600,
-                  letterSpacing: '0.05em',
-                  padding: '4px 10px',
-                  borderRadius: '4px',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '6px'
-                }}>
-                  <Tag size={12} />
-                  {guide.category}
-                </span>
-                <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', color: '#888', fontSize: '0.85rem' }}>
-                  <Clock size={12} style={{ color: '#d4af37' }} />
-                  6 min read
-                </span>
-                <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', color: '#888', fontSize: '0.85rem' }}>
-                  <Calendar size={12} style={{ color: '#d4af37' }} />
-                  Updated: June 2026
-                </span>
-              </div>
+      <div className="max-w-7xl mx-auto px-4 py-8 md:py-16 grid grid-cols-1 lg:grid-cols-12 gap-12">
+        {/* Main Content Area */}
+        <article className="lg:col-span-8 space-y-8 bg-[#111625]/40 border border-gray-800/80 p-6 md:p-10 rounded-3xl backdrop-blur-sm">
+          {/* Breadcrumb */}
+          <nav className="flex items-center space-x-1.5 text-xs text-gray-500 font-semibold uppercase tracking-wider">
+            <Link href="/" className="hover:text-amber-500">Home</Link>
+            <ChevronRight size={12} />
+            <span className="text-amber-500">{guide.category}</span>
+          </nav>
 
-              {/* Title */}
-              <h1 style={{
-                fontSize: '2.5rem',
-                fontWeight: 700,
-                lineHeight: '1.25',
-                color: '#fff',
-                marginBottom: '28px',
-                fontFamily: '"Playfair Display", serif',
-                letterSpacing: '0.02em'
-              }}>
-                {guide.title}
-              </h1>
-
-              {/* Cover/Placeholder Image */}
-              <div style={{
-                borderRadius: '12px',
-                overflow: 'hidden',
-                border: '1px solid rgba(212, 175, 55, 0.12)',
-                backgroundColor: '#101010',
-                marginBottom: '40px'
-              }}>
-                <img 
-                  src="/images/carousel_inventory.webp" 
-                  alt={guide.title} 
-                  style={{ width: '100%', height: 'auto', display: 'block', maxHeight: '400px', objectFit: 'cover' }}
-                />
-              </div>
-
-              {/* Article Body HTML */}
-              <div 
-                className="prose prose-invert max-w-none prose-headings:text-white prose-headings:font-bold prose-h1:text-3xl prose-h2:text-2xl prose-p:text-gray-300 prose-p:leading-relaxed prose-li:text-gray-400 prose-strong:text-amber-500 prose-strong:font-black prose-a:text-amber-500 hover:prose-a:text-amber-400"
-                style={{ fontSize: '1.05rem', lineHeight: '1.85', color: '#ccc' }}
-                dangerouslySetInnerHTML={{ __html: guide.content }}
-              />
-
-              {/* Bottom Nav */}
-              <div style={{
-                borderTop: '1px solid rgba(212, 175, 55, 0.08)',
-                paddingTop: '24px',
-                marginTop: '48px',
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                flexWrap: 'wrap',
-                gap: '16px'
-              }}>
-                <a 
-                  href="/" 
-                  style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '8px',
-                    color: '#d4af37',
-                    textDecoration: 'none',
-                    fontSize: '0.9rem',
-                    fontWeight: 600
-                  }}
-                >
-                  <ArrowLeft size={16} />
-                  Back to Home
-                </a>
-
-                <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
-                  <span style={{ color: '#555', fontSize: '0.85rem' }}>EXCAVATOR PRO Buyer Guides</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Right: Sidebar Recommendation Column */}
-            <div className="news-detail-sidebar">
-              <div style={{
-                position: 'sticky',
-                top: '140px',
-                backgroundColor: '#0d0d0d',
-                border: '1px solid rgba(212, 175, 55, 0.08)',
-                borderRadius: '12px',
-                padding: '30px 24px'
-              }}>
-                <h3 style={{
-                  fontSize: '1.2rem',
-                  fontWeight: 600,
-                  color: '#fff',
-                  fontFamily: '"Playfair Display", serif',
-                  marginBottom: '20px',
-                  borderBottom: '1px solid rgba(212, 175, 55, 0.15)',
-                  paddingBottom: '10px'
-                }}>
-                  More <span style={{ color: '#d4af37' }}>Buyer Guides</span>
-                </h3>
-
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-                  {recommendations.map((rec) => (
-                    <div key={rec.slug} style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                      <span style={{ color: '#d4af37', fontSize: '0.72rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                        {rec.category}
-                      </span>
-                      <h4 style={{ fontSize: '0.95rem', fontWeight: 600, lineHeight: '1.4', margin: 0 }}>
-                        <a 
-                          href={`/guides/${rec.slug}`}
-                          style={{ color: '#fff', textDecoration: 'none' }}
-                        >
-                          {rec.title}
-                        </a>
-                      </h4>
-                      <p style={{ color: '#666', fontSize: '0.78rem', margin: 0 }}>{rec.shortDesc}</p>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Direct B2B Wholesale Contact CTA Widget */}
-                <div style={{
-                  marginTop: '40px',
-                  backgroundColor: '#050505',
-                  border: '1px solid rgba(212, 175, 55, 0.15)',
-                  borderRadius: '8px',
-                  padding: '24px 20px',
-                  textAlign: 'center'
-                }}>
-                  <h4 style={{ fontSize: '1.1rem', fontWeight: 700, margin: '0 0 10px', color: '#fff', fontFamily: '"Playfair Display", serif' }}>
-                    Need Machinery <span style={{ color: '#d4af37' }}>CIF/FOB Quote</span>?
-                  </h4>
-                  <p style={{ color: '#888', fontSize: '0.8rem', lineHeight: '1.5', margin: '0 0 18px' }}>
-                    Get direct-yard wholesale pricing and transparent 120-point SGS inspection reports on Maersk/COSCO shipping.
-                  </p>
-                  <a 
-                    href="https://wa.me/8618326001631?text=Hi%20Excavator%20Pro%2C%20I%20am%20looking%20for%20premium%20used%20excavators."
-                    className="btn btn-primary"
-                    style={{ display: 'block', padding: '10px', fontSize: '0.82rem', borderRadius: '4px' }}
-                  >
-                    Inquire on WhatsApp
-                  </a>
-                </div>
-              </div>
+          {/* Title and Meta */}
+          <div className="space-y-4 border-b border-gray-900 pb-6">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-white leading-tight tracking-tight">
+              {guide.title}
+            </h1>
+            <div className="flex flex-wrap items-center gap-6 text-xs text-gray-500">
+              <span className="flex items-center"><Clock size={14} className="mr-1.5 text-amber-500" /> 6 min read</span>
+              <span className="flex items-center"><Calendar size={14} className="mr-1.5 text-amber-500" /> June 2026</span>
+              <span className="inline-flex items-center px-2.5 py-1 rounded bg-amber-500/10 border border-amber-500/20 text-[10px] font-bold text-amber-500 uppercase tracking-widest">
+                {guide.category}
+              </span>
             </div>
           </div>
-        </div>
-      </article>
 
-      <FloatingContact />
-    </main>
+          {/* Article Body HTML */}
+          <div 
+            className="prose prose-invert max-w-none prose-headings:text-white prose-headings:font-black prose-h1:text-3xl prose-h2:text-2xl prose-p:text-gray-300 prose-p:leading-relaxed prose-li:text-gray-400 prose-strong:text-amber-500 prose-strong:font-black prose-a:text-amber-500 hover:prose-a:text-amber-400 prose-table:border prose-table:border-gray-800 prose-th:bg-[#111625] prose-th:p-3 prose-td:p-3 prose-td:border-b prose-td:border-gray-800"
+            dangerouslySetInnerHTML={{ __html: guide.content }}
+          />
+        </article>
+
+        {/* Sidebar */}
+        <aside className="lg:col-span-4 space-y-8">
+          {/* Sourcing CTA card */}
+          <div className="bg-[#111625] border border-gray-800 p-6 rounded-3xl relative overflow-hidden space-y-4">
+            <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-amber-500/40 via-yellow-500/70 to-transparent"></div>
+            <h3 className="text-lg font-black text-white inline-flex items-center">
+              <ShieldCheck size={20} className="mr-2 text-amber-500" /> Direct-Yard Wholesale
+            </h3>
+            <p className="text-xs text-gray-400 leading-relaxed">
+              We specialize in exporting verified used heavy machinery with 100% genuine components, 120-point SGS inspection, and weekly worldwide logistics options.
+            </p>
+            <div className="pt-2">
+              <Link href="/#contact" className="w-full bg-amber-500 hover:bg-amber-400 text-black font-extrabold text-xs py-3 rounded-xl transition-all shadow-lg shadow-amber-500/10 flex justify-center items-center">
+                Submit Sourcing Request
+              </Link>
+            </div>
+          </div>
+
+          {/* Recommend guides */}
+          <div className="space-y-4">
+            <h3 className="text-xs font-black text-gray-500 uppercase tracking-widest">
+              More Buyer Guides
+            </h3>
+            <div className="space-y-4">
+              {otherGuides.map((g) => (
+                <Link key={g.slug} href={`/guides/${g.slug}`} className="block bg-[#111625]/40 border border-gray-800/80 p-5 rounded-2xl transition-all hover:border-gray-700/80 group">
+                  <span className="text-[10px] font-extrabold text-amber-500 tracking-wider uppercase block mb-1">
+                    {g.category}
+                  </span>
+                  <h4 className="text-sm font-bold text-white group-hover:text-amber-500 transition-colors duration-200 line-clamp-1">
+                    {g.title}
+                  </h4>
+                  <p className="text-xs text-gray-500 line-clamp-2 mt-1.5">
+                    {g.shortDesc}
+                  </p>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
   );
 }

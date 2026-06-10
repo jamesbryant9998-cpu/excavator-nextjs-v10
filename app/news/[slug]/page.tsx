@@ -1,10 +1,5 @@
-import { ArrowLeft, Calendar, Tag, ChevronRight, User } from 'lucide-react';
-import Link from 'next/link';
-import Image from 'next/image';
-import Header from '../../../components/Header';
-import FloatingContact from '../../../components/FloatingContact';
-import newsData from '../../../data/news.json';
-import { notFound } from 'next/navigation';
+import { ArrowLeft, Calendar, Tag, Clock, ShieldCheck, Award } from "lucide-react";
+import newsData from "../../../data/news.json";
 
 interface PageProps {
   params: {
@@ -12,268 +7,88 @@ interface PageProps {
   };
 }
 
-// Generate static routes for Next.js build compilation
-export async function generateStaticParams() {
-  return newsData.map((article) => ({
-    slug: article.slug,
-  }));
-}
+export default function NewsPostDetail({ params }: PageProps) {
+  // Find news by slug
+  const newsItem = newsData.find((n) => n.slug === params.slug);
 
-export default function NewsDetailPage({ params }: PageProps) {
-  const article = newsData.find((a) => a.slug === params.slug);
-
-  if (!article) {
-    notFound();
-  }
-
-  // Get other recommended articles
-  const recommendations = newsData
-    .filter((a) => a.slug !== article.slug)
-    .slice(0, 3);
-
-  // Split content into readable sections based on standard sentences
-  const paragraphs = article.content
-    .split("\n\n")
-    .map(p => p.trim())
-    .filter(Boolean);
-
-  return (
-    <main style={{ minHeight: '100vh', position: 'relative', backgroundColor: '#050505', color: '#fff', paddingTop: '120px' }}>
-      <Header />
-
-      {/* Breadcrumb Bar */}
-      <div style={{ borderBottom: '1px solid rgba(212, 175, 55, 0.08)', padding: '16px 0' }}>
-        <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px', display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.82rem', color: '#666' }}>
-          <a href="/" style={{ color: '#666', textDecoration: 'none' }}>Home</a>
-          <ChevronRight size={12} />
-          <a href="/news" style={{ color: '#666', textDecoration: 'none' }}>News</a>
-          <ChevronRight size={12} />
-          <span style={{ color: '#d4af37' }}>{article.title}</span>
+  // If news not found
+  if (!newsItem) {
+    return (
+      <div className="bg-[#0b0f19] py-32 text-center space-y-6 min-h-screen flex flex-col justify-center items-center">
+        <h1 className="text-3xl font-black text-white">Announcement Not Found</h1>
+        <p className="text-gray-400 text-sm">The news article with slug "{params.slug}" does not exist in our system.</p>
+        <div className="pt-4">
+          <a href="/news" className="bg-amber-500 hover:bg-amber-400 text-black font-extrabold text-xs px-6 py-3 rounded-xl transition-all">
+            Back to Newsroom
+          </a>
         </div>
       </div>
+    );
+  }
 
-      <article style={{ padding: '60px 0 80px' }}>
-        <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px' }}>
-          <div className="news-detail-grid">
-            {/* Left: Main Content Column */}
-            <div className="news-detail-main">
-              {/* Category & Date */}
-              <div style={{ display: 'flex', gap: '20px', alignItems: 'center', marginBottom: '20px', flexWrap: 'wrap' }}>
-                <span style={{
-                  backgroundColor: 'rgba(212, 175, 55, 0.08)',
-                  border: '1px solid rgba(212, 175, 55, 0.2)',
-                  color: '#d4af37',
-                  fontSize: '0.78rem',
-                  fontWeight: 600,
-                  letterSpacing: '0.05em',
-                  padding: '4px 10px',
-                  borderRadius: '4px',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '6px'
-                }}>
-                  <Tag size={12} />
-                  {article.category}
-                </span>
-                <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', color: '#888', fontSize: '0.85rem' }}>
-                  <Calendar size={12} style={{ color: '#d4af37' }} />
-                  Published: {article.date}
-                </span>
-              </div>
+  return (
+    <div className="bg-[#0b0f19] py-12 min-h-screen">
+      <div className="max-w-4xl mx-auto px-4 space-y-8">
+        {/* Breadcrumb & Navigation */}
+        <div className="flex items-center justify-between">
+          <a href="/news" className="inline-flex items-center text-xs text-gray-400 hover:text-amber-500 font-bold tracking-wide transition-colors">
+            <ArrowLeft size={14} className="mr-2" /> Back to Newsroom
+          </a>
+          <span className="text-xs text-gray-600 font-semibold uppercase">NEWS ID: {newsItem.id}</span>
+        </div>
 
-              {/* Title */}
-              <h1 style={{
-                fontSize: '2.5rem',
-                fontWeight: 700,
-                lineHeight: '1.25',
-                color: '#fff',
-                marginBottom: '28px',
-                fontFamily: '"Playfair Display", serif',
-                letterSpacing: '0.02em'
-              }}>
-                {article.title}
-              </h1>
-
-              {/* Cover Image */}
-              <div style={{
-                borderRadius: '12px',
-                overflow: 'hidden',
-                border: '1px solid rgba(212, 175, 55, 0.12)',
-                backgroundColor: '#101010',
-                marginBottom: '32px'
-              }}>
-                <img 
-                  src={article.image} 
-                  alt={article.title} 
-                  style={{ width: '100%', height: 'auto', display: 'block' }}
-                />
-              </div>
-
-              {/* Paragraphs */}
-              <div style={{ fontSize: '1.05rem', lineHeight: '1.85', color: '#ccc' }}>
-                {paragraphs.map((p, idx) => {
-                  if (idx === 0) {
-                    return (
-                      <p key={idx} style={{ fontSize: '1.15rem', color: '#fff', marginBottom: '24px', lineHeight: '1.8' }}>
-                        {p}
-                      </p>
-                    );
-                  }
-                  if (idx === 2) {
-                    return (
-                      <div key={idx}>
-                        <blockquote style={{
-                          borderLeft: '3px solid #d4af37',
-                          backgroundColor: '#0d0d0d',
-                          padding: '24px 30px',
-                          margin: '32px 0',
-                          borderRadius: '0 8px 8px 0',
-                          fontSize: '1.15rem',
-                          fontStyle: 'italic',
-                          color: '#d4af37',
-                          lineHeight: '1.6',
-                          fontFamily: '"Playfair Display", serif'
-                        }}>
-                          "Strategic B2B logistical expanding cuts sea transit times by up to 8 days, optimizing the overall landed costs and providing high security of shipping."
-                        </blockquote>
-                        <p style={{ marginBottom: '24px' }}>{p}</p>
-                      </div>
-                    );
-                  }
-                  return <p key={idx} style={{ marginBottom: '24px' }}>{p}</p>;
-                })}
-              </div>
-
-              {/* Focus Keywords */}
-              <div style={{ 
-                borderTop: '1px solid rgba(212, 175, 55, 0.08)', 
-                paddingTop: '20px', 
-                margin: '32px 0'
-              }}>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', alignItems: 'center' }}>
-                  <span style={{ fontSize: '0.82rem', color: '#555', fontWeight: 600, textTransform: 'uppercase' }}>Focus Keywords:</span>
-                  {['machinery export announcements', 'SGS certification exporter', 'container logistics expand', 'heavy equipment stock arrivals'].map((kw, kIdx) => (
-                    <span 
-                      key={kIdx}
-                      style={{
-                        backgroundColor: 'rgba(212, 175, 55, 0.03)',
-                        border: '1px solid rgba(212, 175, 55, 0.08)',
-                        color: '#a0a0a0',
-                        fontSize: '0.8rem',
-                        padding: '3px 10px',
-                        borderRadius: '30px'
-                      }}
-                    >
-                      {kw}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              {/* Footer */}
-              <div style={{
-                borderTop: '1px solid rgba(212, 175, 55, 0.08)',
-                paddingTop: '24px',
-                marginTop: '48px',
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                flexWrap: 'wrap',
-                gap: '16px'
-              }}>
-                <a 
-                  href="/news" 
-                  style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '8px',
-                    color: '#d4af37',
-                    textDecoration: 'none',
-                    fontSize: '0.9rem',
-                    fontWeight: 600
-                  }}
-                >
-                  <ArrowLeft size={16} />
-                  Back to News
-                </a>
-
-                <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
-                  <span style={{ color: '#555', fontSize: '0.85rem' }}>EXCAVATOR PRO Newsroom</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Right: Sidebar Recommendation Column */}
-            <div className="news-detail-sidebar">
-              <div style={{
-                position: 'sticky',
-                top: '140px',
-                backgroundColor: '#0d0d0d',
-                border: '1px solid rgba(212, 175, 55, 0.08)',
-                borderRadius: '12px',
-                padding: '30px 24px'
-              }}>
-                <h3 style={{
-                  fontSize: '1.2rem',
-                  fontWeight: 600,
-                  color: '#fff',
-                  fontFamily: '"Playfair Display", serif',
-                  marginBottom: '20px',
-                  borderBottom: '1px solid rgba(212, 175, 55, 0.15)',
-                  paddingBottom: '10px'
-                }}>
-                  Trending <span style={{ color: '#d4af37' }}>Announcements</span>
-                </h3>
-
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-                  {recommendations.map((rec) => (
-                    <div key={rec.id} style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                      <span style={{ color: '#d4af37', fontSize: '0.72rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                        {rec.category}
-                      </span>
-                      <h4 style={{ fontSize: '0.95rem', fontWeight: 600, lineHeight: '1.4', margin: 0 }}>
-                        <a 
-                          href={`/news/${rec.slug}`}
-                          style={{ color: '#fff', textDecoration: 'none' }}
-                        >
-                          {rec.title}
-                        </a>
-                      </h4>
-                      <span style={{ color: '#555', fontSize: '0.78rem' }}>{rec.date}</span>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Direct B2B Wholesale Contact CTA Widget */}
-                <div style={{
-                  marginTop: '40px',
-                  backgroundColor: '#050505',
-                  border: '1px solid rgba(212, 175, 55, 0.15)',
-                  borderRadius: '8px',
-                  padding: '24px 20px',
-                  textAlign: 'center'
-                }}>
-                  <h4 style={{ fontSize: '1.1rem', fontWeight: 700, margin: '0 0 10px', color: '#fff', fontFamily: '"Playfair Display", serif' }}>
-                    Need Machinery <span style={{ color: '#d4af37' }}>CIF/FOB Quote</span>?
-                  </h4>
-                  <p style={{ color: '#888', fontSize: '0.8rem', lineHeight: '1.5', margin: '0 0 18px' }}>
-                    Get direct-yard wholesale pricing and transparent 120-point SGS inspection reports on Maersk/COSCO shipping.
-                  </p>
-                  <a 
-                    href="https://wa.me/8618326001631?text=Hi%20Excavator%20Pro%2C%20I%20am%20looking%20for%20premium%20used%20excavators."
-                    className="btn btn-primary"
-                    style={{ display: 'block', padding: '10px', fontSize: '0.82rem', borderRadius: '4px' }}
-                  >
-                    Inquire on WhatsApp
-                  </a>
-                </div>
-              </div>
-            </div>
+        {/* Article Meta Header */}
+        <div className="space-y-4 border-b border-gray-900 pb-6">
+          <h1 className="text-3xl sm:text-4xl font-black text-white leading-tight tracking-tight">
+            {newsItem.title}
+          </h1>
+          
+          <div className="flex flex-wrap items-center gap-y-2 gap-x-6 text-xs text-gray-400">
+            <span className="flex items-center"><Calendar size={14} className="mr-1.5 text-amber-500" /> Published on {newsItem.date}</span>
+            <span className="flex items-center"><Tag size={14} className="mr-1.5 text-amber-500" /> Category: {newsItem.category}</span>
+            <span className="flex items-center"><Clock size={14} className="mr-1.5 text-amber-500" /> 3 Min Read</span>
           </div>
         </div>
-      </article>
 
-      <FloatingContact />
-    </main>
+        {/* Big Cover Image */}
+        <div className="bg-[#111625] border border-gray-800 rounded-3xl p-3 shadow-2xl overflow-hidden">
+          <img 
+            src={newsItem.image} 
+            alt={newsItem.title} 
+            className="w-full h-64 sm:h-96 object-cover rounded-2xl border border-gray-900"
+          />
+        </div>
+
+        {/* Article Content Area */}
+        <article className="prose prose-invert max-w-none text-gray-300 text-sm sm:text-base leading-relaxed space-y-6">
+          {newsItem.content.split("\n\n").map((p, idx) => (
+            <p key={idx}>{p}</p>
+          ))}
+        </article>
+
+        {/* Bottom Call to Action for buyers */}
+        <div className="bg-[#111625] border border-gray-800 rounded-3xl p-8 flex flex-col sm:flex-row items-center justify-between gap-6 mt-12 relative overflow-hidden">
+          <div className="absolute inset-y-0 right-0 w-1/3 bg-[radial-gradient(circle_at_right,rgba(245,158,11,0.02),transparent)] pointer-events-none"></div>
+          <div className="space-y-2 text-center sm:text-left">
+            <h3 className="text-lg font-extrabold text-white">Partner with HEAVYEXPO</h3>
+            <p className="text-gray-400 text-xs max-w-md">
+              Whether you need custom clearance support or wholesale pricing on machinery lots, our certified export specialists are ready to design your cargo logistics.
+            </p>
+          </div>
+          <div className="flex-shrink-0">
+            <a href="/#contact" className="inline-flex items-center bg-amber-500 hover:bg-amber-400 text-black font-extrabold text-xs px-6 py-3.5 rounded-xl transition-all shadow-lg shadow-amber-500/10">
+              Get Professional Quote
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
   );
+}
+
+// Generate static params for Next.js static export compilation
+export async function generateStaticParams() {
+  return newsData.map((newsItem) => ({
+    slug: newsItem.slug,
+  }));
 }

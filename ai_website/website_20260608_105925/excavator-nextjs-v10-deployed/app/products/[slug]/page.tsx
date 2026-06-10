@@ -1,1 +1,0 @@
-export default function Product(){return <main><h1>Product Detail</h1></main>}
