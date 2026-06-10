@@ -1,420 +1,671 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import Link from "next/link";
-import { ShieldCheck, Anchor, HardHat, CheckCircle2, Phone, Mail, Award, ArrowRight, HelpCircle, BookOpen } from "lucide-react";
-import productsData from "../data/products.json";
-import guidesData from "../data/guides.json";
+import Link from 'next/link';
+import Image from 'next/image';
+import { useState, useRef } from 'react';
+import { 
+  Award, 
+  ShieldCheck, 
+  Compass, 
+  Globe, 
+  Users, 
+  CheckCircle, 
+  UploadCloud, 
+  Clock, 
+  Workflow, 
+  FileText, 
+  Sparkles, 
+  ChevronRight,
+  HardHat,
+  Anchor,
+  BookOpen,
+  Mail,
+  Send,
+  HelpCircle,
+  Gauge,
+  Bolt,
+  Cpu
+} from 'lucide-react';
+import Header from '../components/Header';
+import ReviewsSlider from '../components/ReviewsSlider';
+import FloatingContact from '../components/FloatingContact';
+import productsData from '../data/products.json';
+import guidesData from '../data/guides.json';
 
-export default function Page() {
-  const [selectedBrand, setSelectedBrand] = useState("All");
+export default function Home() {
+  const [selectedBrand, setSelectedBrand] = useState('All');
+  
+  // RFQ Form States
+  const [productType, setProductType] = useState('Caterpillar Excavators');
+  const [tonnage, setTonnage] = useState('Standard (20 - 24 Tons)');
+  const [email, setEmail] = useState('');
+  const [port, setPort] = useState('');
+  const [phone, setPhone] = useState('');
+  const [notes, setNotes] = useState('');
+  const [fileName, setFileName] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Get unique brands
-  const brands = ["All", ...Array.from(new Set(productsData.map((p) => p.brand)))];
+  const brands = ['All', ...Array.from(new Set(productsData.map((p) => p.brand)))];
 
   // Filter products based on selected brand
-  const filteredProducts = selectedBrand === "All" 
+  const filteredProducts = selectedBrand === 'All' 
     ? productsData 
     : productsData.filter((p) => p.brand === selectedBrand);
 
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setFileName(e.target.files[0].name);
+    }
+  };
+
+  const handleRfqSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email) return;
+    setIsSubmitting(true);
+    setTimeout(() => {
+      setIsSubmitting(false);
+      setIsSubmitted(true);
+      setEmail('');
+      setPort('');
+      setPhone('');
+      setNotes('');
+      setFileName('');
+    }, 1200);
+  };
+
   return (
-    <div className="bg-[#0b0f19]">
-      {/* Premium B2B Heavy Machinery Static Showcase Banner */}
-      <section className="relative w-full py-16 md:py-24 bg-gray-950 overflow-hidden border-b border-gray-950">
-        {/* Background Image of Massive Stock */}
-        <div className="absolute inset-0 z-0">
-          <img 
-            src="/images/carousel_inventory.webp" 
-            alt="Massive Heavy Machinery Stock" 
-            className="w-full h-full object-cover opacity-75 filter brightness-95 contrast-110"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0b0f19]/50 via-transparent to-[#0b0f19]/70"></div>
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0b0f19]/20 via-transparent to-[#0b0f19]"></div>
-        </div>
+    <main style={{ minHeight: '100vh', backgroundColor: '#050505', position: 'relative' }}>
+      <Header />
 
-        {/* Content Container */}
-        <div className="max-w-7xl mx-auto px-4 relative z-10 space-y-12">
-          {/* Header Title displaying Stock & Scale */}
-          <div className="text-center space-y-4 max-w-3xl mx-auto">
-            <span className="inline-flex items-center space-x-1.5 bg-amber-500/10 border border-amber-500/20 px-3 py-1.5 rounded-full text-amber-500 text-xs font-black tracking-widest uppercase animate-pulse">
-              <HardHat size={14} />
-              <span>Massive Direct-Sourced Live Inventory</span>
+      {/* Hero Wrapper Section */}
+      <section className="hero-wrapper" style={{ backgroundImage: "linear-gradient(rgba(5, 5, 5, 0.4), rgba(5, 5, 5, 0.85)), url('/images/carousel_inventory.webp')", backgroundSize: 'cover', backgroundPosition: 'center' }}>
+        <div className="container" style={{ zIndex: 10, position: 'relative' }}>
+          <div className="hero-content">
+            <span className="hero-subtitle">
+              <Sparkles size={14} style={{ display: 'inline-block', marginRight: '6px', verticalAlign: 'middle' }} />
+              Massive Direct-Sourced Live Inventory
             </span>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-white leading-tight tracking-tight">
-              500+ Active Units In Stock & <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-yellow-500">Ready for Global Dispatch</span>
-            </h2>
-            <p className="text-gray-300 text-xs sm:text-sm leading-relaxed max-w-2xl mx-auto">
-              Our massive 50,000 m² shipping yard holds certified pre-owned heavy excavators from top brands. Direct B2B wholesale sourcing ensures original components and unbeatable export prices.
+            <h1 className="hero-title" style={{ fontSize: '3.6rem', fontFamily: '"Playfair Display", serif' }}>
+              500+ Active Units In Stock &<br />
+              <span style={{ color: '#d4af37', fontStyle: 'italic', display: 'inline' }}>Ready for Global Dispatch</span>
+            </h1>
+            <p className="hero-desc">
+              Our massive 50,000 m² Shanghai yard holds certified pre-owned heavy excavators from top brands. Direct B2B wholesale sourcing ensures original components and unbeatable export port prices.
             </p>
+            <div className="btn-group">
+              <a href="#products" className="btn btn-primary">
+                Browse Live Inventory
+              </a>
+              <a href="#contact" className="btn" style={{ border: '1px solid rgba(255,255,255,0.2)', color: '#fff' }}>
+                Request Custom CIF Quote
+              </a>
+            </div>
           </div>
+        </div>
+      </section>
 
-          {/* Static 4-Dimensional Factory Strengths Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {/* Static 4-Dimensional Factory Strengths Grid */}
+      <section className="section" style={{ backgroundColor: '#0a0a0a', borderBottom: '1px solid rgba(212, 175, 55, 0.08)' }}>
+        <div className="container">
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '30px' }}>
             {/* Advantage 1 */}
-            <div className="bg-black/80 border border-amber-500/15 hover:border-amber-500/30 rounded-2xl p-6 backdrop-blur-md transition-all shadow-xl space-y-3 hover:translate-y-[-2px] duration-300">
-              <Award className="text-amber-500" size={24} />
-              <h4 className="text-sm font-extrabold text-white uppercase tracking-wider">Original Components</h4>
-              <p className="text-xs text-gray-400 leading-relaxed">
+            <div style={{ padding: '30px', backgroundColor: '#0d0d0d', border: '1px solid rgba(212, 175, 55, 0.05)', borderRadius: '8px', transition: 'all 0.3s' }} onMouseEnter={(e)=>{e.currentTarget.style.borderColor='rgba(212,175,55,0.25)'}} onMouseLeave={(e)=>{e.currentTarget.style.borderColor='rgba(212,175,55,0.05)'}}>
+              <Award className="text-amber-500" size={28} style={{ color: '#d4af37', marginBottom: '16px' }} />
+              <h3 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#fff', marginBottom: '12px', fontFamily: '"Playfair Display", serif' }}>Original Components</h3>
+              <p style={{ fontSize: '0.85rem', color: '#888', lineHeight: '1.6' }}>
                 100% guaranteed genuine diesel engines, main hydraulic pumps, and rotary motor blocks. Strictly no low-quality refurbished parts.
               </p>
             </div>
             {/* Advantage 2 */}
-            <div className="bg-black/80 border border-amber-500/15 hover:border-amber-500/30 rounded-2xl p-6 backdrop-blur-md transition-all shadow-xl space-y-3 hover:translate-y-[-2px] duration-300">
-              <ShieldCheck className="text-emerald-500" size={24} />
-              <h4 className="text-sm font-extrabold text-white uppercase tracking-wider">120-Point SGS Inspect</h4>
-              <p className="text-xs text-gray-400 leading-relaxed">
+            <div style={{ padding: '30px', backgroundColor: '#0d0d0d', border: '1px solid rgba(212, 175, 55, 0.05)', borderRadius: '8px', transition: 'all 0.3s' }} onMouseEnter={(e)=>{e.currentTarget.style.borderColor='rgba(212,175,55,0.25)'}} onMouseLeave={(e)=>{e.currentTarget.style.borderColor='rgba(212,175,55,0.05)'}}>
+              <ShieldCheck className="text-emerald-500" size={28} style={{ color: '#d4af37', marginBottom: '16px' }} />
+              <h3 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#fff', marginBottom: '12px', fontFamily: '"Playfair Display", serif' }}>120-Point SGS Inspect</h3>
+              <p style={{ fontSize: '0.85rem', color: '#888', lineHeight: '1.6' }}>
                 Comprehensive on-site physical load testing, cylinder response times and oil leakage mapping. Full SGS export certification provided.
               </p>
             </div>
             {/* Advantage 3 */}
-            <div className="bg-black/80 border border-amber-500/15 hover:border-amber-500/30 rounded-2xl p-6 backdrop-blur-md transition-all shadow-xl space-y-3 hover:translate-y-[-2px] duration-300">
-              <Anchor className="text-blue-500" size={24} />
-              <h4 className="text-sm font-extrabold text-white uppercase tracking-wider">Secure Sea Logistics</h4>
-              <p className="text-xs text-gray-400 leading-relaxed">
-                Strategic Weekly container allotments and Flat Rack lashing services directly out of Shanghai Port. Guaranteed zero maritime transport damage.
+            <div style={{ padding: '30px', backgroundColor: '#0d0d0d', border: '1px solid rgba(212, 175, 55, 0.05)', borderRadius: '8px', transition: 'all 0.3s' }} onMouseEnter={(e)=>{e.currentTarget.style.borderColor='rgba(212,175,55,0.25)'}} onMouseLeave={(e)=>{e.currentTarget.style.borderColor='rgba(212,175,55,0.05)'}}>
+              <Anchor className="text-blue-500" size={28} style={{ color: '#d4af37', marginBottom: '16px' }} />
+              <h3 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#fff', marginBottom: '12px', fontFamily: '"Playfair Display", serif' }}>Secure Sea Logistics</h3>
+              <p style={{ fontSize: '0.85rem', color: '#888', lineHeight: '1.6' }}>
+                Strategic weekly container allotments and Flat Rack lashing services directly out of Shanghai Port. Guaranteed zero transport damage.
               </p>
             </div>
             {/* Advantage 4 */}
-            <div className="bg-black/80 border border-amber-500/15 hover:border-amber-500/30 rounded-2xl p-6 backdrop-blur-md transition-all shadow-xl space-y-3 hover:translate-y-[-2px] duration-300">
-              <CheckCircle2 className="text-amber-500" size={24} />
-              <h4 className="text-sm font-extrabold text-white uppercase tracking-wider">98.4% On-Time Delivery</h4>
-              <p className="text-xs text-gray-400 leading-relaxed">
+            <div style={{ padding: '30px', backgroundColor: '#0d0d0d', border: '1px solid rgba(212, 175, 55, 0.05)', borderRadius: '8px', transition: 'all 0.3s' }} onMouseEnter={(e)=>{e.currentTarget.style.borderColor='rgba(212,175,55,0.25)'}} onMouseLeave={(e)=>{e.currentTarget.style.borderColor='rgba(212,175,55,0.05)'}}>
+              <CheckCircle className="text-amber-500" size={28} style={{ color: '#d4af37', marginBottom: '16px' }} />
+              <h3 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#fff', marginBottom: '12px', fontFamily: '"Playfair Display", serif' }}>98.4% On-Time Delivery</h3>
+              <p style={{ fontSize: '0.85rem', color: '#888', lineHeight: '1.6' }}>
                 Direct partnerships with COSCO, Maersk, and CMA CGM. Fast customs declaration and transparent port-to-port tracking.
               </p>
             </div>
           </div>
         </div>
       </section>
-      {/* Premium Hero Section */}
-      <section className="relative overflow-hidden py-20 lg:py-32 border-b border-gray-950 bg-gradient-to-b from-[#0e1424] to-[#0b0f19]">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(245,158,11,0.05),transparent_50%)]"></div>
-        <div className="max-w-7xl mx-auto px-4 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          <div className="lg:col-span-7 space-y-6 text-left">
-            <div className="inline-flex items-center space-x-2 bg-amber-500/10 border border-amber-500/20 px-3 py-1.5 rounded-full text-amber-500 text-xs font-bold tracking-wide uppercase">
-              <Award size={14} />
-              <span>No.1 Used Construction Equipment Exporter</span>
-            </div>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-tight tracking-tight">
-              Premium Condition <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-yellow-500">Used Excavators</span>
-            </h1>
-            <p className="text-gray-400 text-base sm:text-lg max-w-xl leading-relaxed">
-              Global export of inspected, certified used hydraulic machinery. Brands including Caterpillar, Komatsu, Sany, and Hitachi. Worldwide shipping, custom clearance, and 100% technical transparency.
+
+      {/* Filterable Products Inventory Grid */}
+      <section id="products" className="section">
+        <div className="container">
+          <div className="section-title-wrapper">
+            <span style={{ color: '#d4af37', fontSize: '0.8rem', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', display: 'block', marginBottom: '10px' }}>HEAVY MACHINERY SELECTION</span>
+            <h2 className="section-title" style={{ fontFamily: '"Playfair Display", serif' }}>Certified Used Excavator Stock</h2>
+            <p className="section-desc">
+              All machines are fully detailed, tested under loading, and ready for global export customs declaration.
             </p>
-            <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 pt-4">
-              <a href="#contact" className="inline-flex justify-center items-center bg-amber-500 hover:bg-amber-400 text-black font-extrabold text-sm px-8 py-4 rounded-xl transition-all shadow-xl shadow-amber-500/10 hover:shadow-amber-500/20">
-                Request FOB Quote <ArrowRight size={16} className="ml-2" />
-              </a>
-              <a href="#contact" className="inline-flex justify-center items-center bg-gray-800/80 hover:bg-gray-800 border border-gray-700 hover:border-gray-600 text-white font-bold text-sm px-8 py-4 rounded-xl transition-all">
-                Get Instant Quote
-              </a>
-            </div>
-
-            {/* Quick Stats Grid */}
-            <div className="grid grid-cols-3 gap-4 pt-8 border-t border-gray-900">
-              <div>
-                <p className="text-2xl sm:text-3xl font-black text-white">500+</p>
-                <p className="text-xs text-gray-500 uppercase tracking-wider font-semibold">Machines Exported</p>
-              </div>
-              <div>
-                <p className="text-2xl sm:text-3xl font-black text-white">120+</p>
-                <p className="text-xs text-gray-500 uppercase tracking-wider font-semibold">Inspection Points</p>
-              </div>
-              <div>
-                <p className="text-2xl sm:text-3xl font-black text-white">45+</p>
-                <p className="text-xs text-gray-500 uppercase tracking-wider font-semibold">Countries Reached</p>
-              </div>
-            </div>
           </div>
-
-          {/* Featured Machinery Side Hero Visual */}
-          <div className="lg:col-span-5 relative">
-            <div className="absolute inset-0 bg-gradient-to-tr from-amber-500/10 to-transparent rounded-3xl blur-3xl -z-10"></div>
-            <div className="bg-[#111625] border border-gray-800 p-6 rounded-3xl shadow-2xl relative overflow-hidden">
-              <div className="absolute top-0 right-0 bg-amber-500 text-black text-xs font-black px-4 py-1.5 rounded-bl-xl uppercase tracking-wider">
-                Hot Seller
-              </div>
-              <img 
-                src="https://images.unsplash.com/photo-1579684389782-64d84b5e901a?q=80&w=800&auto=format&fit=crop" 
-                alt="Excavator Caterpillar" 
-                className="w-full h-56 object-cover rounded-xl border border-gray-800 mb-4"
-              />
-              <div className="space-y-2">
-                <div className="flex justify-between items-center">
-                  <h3 className="text-lg font-black text-white">Caterpillar 320D</h3>
-                </div>
-                <p className="text-xs text-gray-400">Weight: 21.5 Tons | Hours: 3200h | Undercarriage: 85%</p>
-                <div className="pt-3 flex justify-between items-center border-t border-gray-800">
-                  <span className="inline-flex items-center text-xs text-emerald-500 font-semibold">
-                    <CheckCircle2 size={14} className="mr-1" /> Original Pump & Engine
-                  </span>
-                  <a href="/products/cat-320d" className="text-xs text-amber-500 font-bold hover:underline inline-flex items-center">
-                    See Spec Sheet <ArrowRight size={12} className="ml-1" />
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Product Inventory Section */}
-      <section id="products" className="py-20 max-w-7xl mx-auto px-4">
-        <div className="text-center space-y-4 mb-12">
-          <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight">
-            Our Excavator <span className="text-amber-500">Product Inventory</span>
-          </h2>
-          <p className="text-gray-400 max-w-xl mx-auto text-sm">
-            Browse our full range of pre-owned machinery. All machines are certified, load-tested, and ready for immediate global export.
-          </p>
 
           {/* Brand Filter Buttons */}
-          <div className="flex flex-wrap justify-center gap-2 pt-4">
-            {brands.map((brand) => (
+          <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '10px', marginBottom: '50px' }}>
+            {brands.map((b) => (
               <button
-                key={brand}
-                onClick={() => setSelectedBrand(brand)}
-                className={`px-4 py-2 rounded-xl text-xs font-extrabold tracking-wider uppercase transition-all border ${
-                  selectedBrand === brand
-                    ? "bg-amber-500 border-amber-500 text-black shadow-lg shadow-amber-500/10"
-                    : "bg-[#111625] border-gray-800 text-gray-400 hover:border-gray-700 hover:text-white"
-                }`}
+                key={b}
+                onClick={() => setSelectedBrand(b)}
+                style={{
+                  padding: '12px 24px',
+                  backgroundColor: selectedBrand === b ? '#d4af37' : '#0d0d0d',
+                  color: selectedBrand === b ? '#050505' : '#a0a0a0',
+                  border: selectedBrand === b ? '1px solid #d4af37' : '1px solid rgba(212, 175, 55, 0.15)',
+                  borderRadius: '30px',
+                  fontSize: '0.85rem',
+                  fontWeight: 600,
+                  cursor: 'pointer',
+                  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
+                }}
+                onMouseEnter={(e) => {
+                  if (selectedBrand !== b) {
+                    e.currentTarget.style.borderColor = '#d4af37';
+                    e.currentTarget.style.color = '#fff';
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (selectedBrand !== b) {
+                    e.currentTarget.style.borderColor = 'rgba(212, 175, 55, 0.15)';
+                    e.currentTarget.style.color = '#a0a0a0';
+                  }
+                }}
               >
-                {brand}
+                {b}
               </button>
             ))}
           </div>
-        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {filteredProducts.map((p) => (
-            <div key={p.id} className="bg-[#111625] border border-gray-800/80 hover:border-gray-700 rounded-2xl overflow-hidden group transition-all hover:-translate-y-1 shadow-xl hover:shadow-2xl hover:shadow-amber-500/5">
-              <div className="relative h-48 sm:h-52 bg-gray-900 overflow-hidden">
-                <img 
-                  src={p.image} 
-                  alt={p.model} 
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                />
-                <div className="absolute bottom-3 left-3 bg-[#0b0f19]/80 backdrop-blur border border-gray-800 text-[10px] text-gray-300 font-extrabold px-2.5 py-1 rounded">
-                  YEAR: {p.year}
+          {/* Products Grid */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))', gap: '30px' }}>
+            {filteredProducts.map((p) => (
+              <div
+                key={p.id}
+                style={{
+                  backgroundColor: '#0d0d0d',
+                  border: '1px solid rgba(212, 175, 55, 0.08)',
+                  borderRadius: '12px',
+                  overflow: 'hidden',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-8px)';
+                  e.currentTarget.style.borderColor = 'rgba(212, 175, 55, 0.25)';
+                  e.currentTarget.style.boxShadow = '0 15px 30px rgba(0,0,0,0.6)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'none';
+                  e.currentTarget.style.borderColor = 'rgba(212, 175, 55, 0.08)';
+                  e.currentTarget.style.boxShadow = 'none';
+                }}
+              >
+                {/* Image & Badge */}
+                <div style={{ height: '240px', overflow: 'hidden', position: 'relative', backgroundColor: '#101010' }}>
+                  <img
+                    src={p.image}
+                    alt={p.model}
+                    style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                  />
+                  <span style={{
+                    position: 'absolute',
+                    top: '15px',
+                    left: '15px',
+                    backgroundColor: 'rgba(5, 5, 5, 0.85)',
+                    border: '1px solid rgba(212, 175, 55, 0.3)',
+                    color: '#d4af37',
+                    fontSize: '0.7rem',
+                    fontWeight: 700,
+                    letterSpacing: '0.05em',
+                    textTransform: 'uppercase',
+                    padding: '6px 12px',
+                    borderRadius: '4px',
+                    backdropFilter: 'blur(5px)'
+                  }}>
+                    {p.brand}
+                  </span>
+                  
+                  {p.price > 0 ? (
+                    <span style={{
+                      position: 'absolute',
+                      bottom: '15px',
+                      right: '15px',
+                      backgroundColor: '#d4af37',
+                      color: '#050505',
+                      fontSize: '0.9rem',
+                      fontWeight: 800,
+                      padding: '4px 10px',
+                      borderRadius: '4px'
+                    }}>
+                      ${p.price.toLocaleString()} USD
+                    </span>
+                  ) : (
+                    <span style={{
+                      position: 'absolute',
+                      bottom: '15px',
+                      right: '15px',
+                      backgroundColor: 'rgba(5, 5, 5, 0.85)',
+                      border: '1px solid rgba(255,255,255,0.15)',
+                      color: '#fff',
+                      fontSize: '0.8rem',
+                      fontWeight: 700,
+                      padding: '4px 10px',
+                      borderRadius: '4px'
+                    }}>
+                      Inquire Price
+                    </span>
+                  )}
                 </div>
-                <div className="absolute top-3 right-3 bg-amber-500 text-black text-xs font-black px-2.5 py-1 rounded">
-                  {p.brand}
+
+                {/* Info Area */}
+                <div style={{ padding: '24px', display: 'flex', flexDirection: 'column', flexGrow: 1, justifyContent: 'space-between' }}>
+                  <div>
+                    <h3 style={{ fontSize: '1.25rem', fontWeight: 600, color: '#fff', marginBottom: '8px', fontFamily: '"Playfair Display", serif' }}>
+                      {p.model}
+                    </h3>
+                    <div style={{ display: 'flex', gap: '15px', fontSize: '0.8rem', color: '#666', marginBottom: '16px' }}>
+                      <span>Year: <strong>{p.year}</strong></span>
+                      <span>|</span>
+                      <span>Hours: <strong>{p.hours} hrs</strong></span>
+                      <span>|</span>
+                      <span>Weight: <strong>{p.weight}</strong></span>
+                    </div>
+                    <p style={{ fontSize: '0.85rem', color: '#888', lineHeight: '1.5', marginBottom: '24px', display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+                      {p.condition}
+                    </p>
+                  </div>
+
+                  <div style={{ borderTop: '1px solid rgba(212, 175, 55, 0.08)', paddingTop: '20px' }}>
+                    <Link
+                      href={`/products/${p.brand.toLowerCase()}-excavators/${p.slug}`}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        textDecoration: 'none',
+                        color: '#d4af37',
+                        fontSize: '0.85rem',
+                        fontWeight: 600,
+                        letterSpacing: '0.05em',
+                        textTransform: 'uppercase'
+                      }}
+                      onMouseEnter={(e) => e.currentTarget.style.color = '#fff'}
+                      onMouseLeave={(e) => e.currentTarget.style.color = '#d4af37'}
+                    >
+                      <span>Explore Technical Specs</span>
+                      <ChevronRight size={16} />
+                    </Link>
+                  </div>
                 </div>
               </div>
-              <div className="p-5 space-y-4">
-                <div className="space-y-1">
-                  <h3 className="text-lg font-black text-white group-hover:text-amber-500 transition-colors">{p.model}</h3>
-                  <p className="text-xs text-gray-500">Usage Hour: <strong className="text-gray-300">{p.hours} hrs</strong> | Weight: <strong className="text-gray-300">{p.weight}</strong></p>
-                </div>
-                <p className="text-xs text-gray-400 line-clamp-2 min-h-[2.5rem]">
-                  {p.condition}
-                </p>
-                <div className="pt-4 border-t border-gray-800 flex justify-end items-center">
-                  <a href={`/products/${p.slug}`} className="inline-flex items-center text-xs font-black bg-amber-500 hover:bg-amber-400 text-black px-4 py-2.5 rounded-lg transition-colors shadow-lg">
-                    View Details
-                  </a>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div className="text-center pt-10">
-          <a href="#contact" className="inline-flex items-center space-x-2 text-sm text-amber-500 hover:text-amber-400 font-black tracking-wide group">
-            <span>Request Custom Sourcing Quote</span>
-            <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-          </a>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* Buyers Guide Section */}
-      <section className="py-20 border-t border-gray-950 max-w-7xl mx-auto px-4">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
-          <div className="space-y-4 max-w-2xl text-left">
-            <span className="inline-flex items-center space-x-1.5 bg-amber-500/10 border border-amber-500/20 px-3 py-1.5 rounded-full text-amber-500 text-xs font-bold tracking-wide uppercase">
-              <BookOpen size={14} />
-              <span>Expert Knowledge Library</span>
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight">
-              Heavy Equipment <span className="text-amber-500">Buyer Guides</span>
-            </h2>
-            <p className="text-gray-400 text-sm leading-relaxed">
-              Understand inspect rules, price depreciation mapping, container shipping methods, and brand comparisons before you place a machinery order.
+      {/* Reviews Slider */}
+      <ReviewsSlider />
+
+      {/* Buyers Guides Section */}
+      <section className="section" style={{ backgroundColor: '#0a0a0a' }}>
+        <div className="container">
+          <div className="section-title-wrapper">
+            <span style={{ color: '#d4af37', fontSize: '0.8rem', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', display: 'block', marginBottom: '10px' }}>EXPERT KNOWLEDGE LIBRARY</span>
+            <h2 className="section-title" style={{ fontFamily: '"Playfair Display", serif' }}>Heavy Equipment Buyer Guides</h2>
+            <p className="section-desc">
+              Understand inspect rules, price depreciation mapping, container shipping methods, and brand comparisons before placing order.
             </p>
           </div>
-          <div className="text-left md:text-right">
-            <a href="#products" className="text-sm text-amber-500 hover:text-amber-400 font-extrabold tracking-wide inline-flex items-center group">
-              <span>View All Inventory</span>
-              <ArrowRight size={16} className="ml-2 group-hover:translate-x-1 transition-transform" />
-            </a>
-          </div>
-        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {guidesData.map((g) => (
-            <div key={g.slug} className="bg-[#111625]/60 border border-gray-800/80 hover:border-gray-700/80 rounded-2xl p-6 flex flex-col justify-between transition-all hover:-translate-y-0.5 shadow-lg group">
-              <div className="space-y-3">
-                <span className="text-amber-500 text-[10px] font-extrabold tracking-widest uppercase block">
-                  {g.category}
-                </span>
-                <h3 className="text-lg font-black text-white group-hover:text-amber-500 transition-colors duration-300">
-                  {g.title}
-                </h3>
-                <p className="text-gray-400 text-xs leading-relaxed line-clamp-3">
-                  {g.shortDesc}
-                </p>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '30px' }}>
+            {guidesData.map((g) => (
+              <div
+                key={g.slug}
+                style={{
+                  backgroundColor: '#0d0d0d',
+                  border: '1px solid rgba(212, 175, 55, 0.05)',
+                  borderRadius: '12px',
+                  padding: '30px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'space-between',
+                  transition: 'all 0.3s'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = 'rgba(212, 175, 55, 0.25)';
+                  e.currentTarget.style.transform = 'translateY(-4px)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = 'rgba(212, 175, 55, 0.05)';
+                  e.currentTarget.style.transform = 'none';
+                }}
+              >
+                <div>
+                  <span style={{ fontSize: '0.72rem', color: '#d4af37', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', display: 'block', marginBottom: '10px' }}>
+                    {g.category}
+                  </span>
+                  <h3 style={{ fontSize: '1.2rem', fontWeight: 600, color: '#fff', marginBottom: '12px', fontFamily: '"Playfair Display", serif' }}>
+                    {g.title}
+                  </h3>
+                  <p style={{ fontSize: '0.85rem', color: '#888', lineHeight: '1.6', marginBottom: '24px' }}>
+                    {g.shortDesc}
+                  </p>
+                </div>
+
+                <div style={{ borderTop: '1px solid rgba(212, 175, 55, 0.08)', paddingTop: '20px' }}>
+                  <Link
+                    href={`/guides/${g.slug}`}
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '8px',
+                      color: '#d4af37',
+                      textDecoration: 'none',
+                      fontSize: '0.82rem',
+                      fontWeight: 600,
+                      letterSpacing: '0.05em',
+                      textTransform: 'uppercase'
+                    }}
+                  >
+                    <span>{g.actionText.replace(' →', '')}</span>
+                    <ChevronRight size={14} />
+                  </Link>
+                </div>
               </div>
-              <div className="pt-6 border-t border-gray-900/50 mt-5">
-                <Link href={`/guides/${g.slug}`} className="text-amber-500 hover:text-amber-400 text-xs font-extrabold tracking-wider uppercase inline-flex items-center group/btn">
-                  <span>{g.actionText}</span>
-                </Link>
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </section>
 
       {/* Core Advantages section */}
-      <section id="about" className="py-20 border-t border-b border-gray-950 bg-gradient-to-b from-[#0b0f19] to-[#070b13]">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            <div className="lg:col-span-5 space-y-6">
-              <h2 className="text-3xl sm:text-4xl font-black text-white leading-tight">
-                Why Global Importers <br />
-                Choose <span className="text-amber-500">HEAVYEXPO</span>
+      <section id="about" className="section">
+        <div className="container">
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', gap: '40px', alignItems: 'center' }} className="grid-about">
+            <div style={{ gridColumn: 'span 7' }} className="about-text-col">
+              <span style={{ color: '#d4af37', fontSize: '0.8rem', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', display: 'block', marginBottom: '10px' }}>TRUST BUILT ON TRANSPARENCY</span>
+              <h2 style={{ fontSize: '2.5rem', fontWeight: 700, color: '#fff', marginBottom: '20px', fontFamily: '"Playfair Display", serif' }}>
+                Why Global Importers Choose EXCAVATOR PRO
               </h2>
-              <p className="text-gray-400 text-sm leading-relaxed">
-                With over a decade of heavy machinery exporting history, we understand that trust is built on absolute transparency. We do not hide machine issues; every detail is documented.
+              <p style={{ color: '#a0a0a0', lineHeight: '1.7', fontSize: '1rem', marginBottom: '24px' }}>
+                With over a decade of heavy machinery exporting history, we understand that trust is built on absolute transparency. We do not hide machine issues; every technical detail is documented.
               </p>
-              <div className="space-y-4">
-                <div className="flex items-start space-x-3">
-                  <div className="p-1 bg-amber-500/20 text-amber-500 rounded mt-0.5">
-                    <CheckCircle2 size={16} />
-                  </div>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                <div style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
+                  <CheckCircle size={20} style={{ color: '#d4af37', flexShrink: 0, marginTop: '2px' }} />
                   <div>
-                    <h4 className="text-sm font-bold text-white">Full Video Inspection</h4>
-                    <p className="text-xs text-gray-500">Live video walk-around, testing cylinder response and engine revs upon request.</p>
+                    <h4 style={{ fontSize: '1.05rem', fontWeight: 600, color: '#fff' }}>Full Video Inspection</h4>
+                    <p style={{ color: '#666', fontSize: '0.85rem', marginTop: '4px' }}>Live video walk-around, testing cylinder response and engine revs upon request.</p>
                   </div>
                 </div>
-                <div className="flex items-start space-x-3">
-                  <div className="p-1 bg-amber-500/20 text-amber-500 rounded mt-0.5">
-                    <CheckCircle2 size={16} />
-                  </div>
+                <div style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
+                  <CheckCircle size={20} style={{ color: '#d4af37', flexShrink: 0, marginTop: '2px' }} />
                   <div>
-                    <h4 className="text-sm font-bold text-white">Customs Declaration Assistance</h4>
-                    <p className="text-xs text-gray-500">All required customs clearance paperwork, export declarations, and certificate of origin.</p>
+                    <h4 style={{ fontSize: '1.05rem', fontWeight: 600, color: '#fff' }}>Official Customs Declaration Support</h4>
+                    <p style={{ color: '#666', fontSize: '0.85rem', marginTop: '4px' }}>Our customs team takes complete care of container strapping, lashing audits, and export clearance.</p>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <div className="p-6 bg-[#111625]/60 border border-gray-800 rounded-2xl space-y-3">
-                <ShieldCheck size={32} className="text-amber-500" />
-                <h3 className="text-base font-extrabold text-white">120-Point SGS Standard Inspect</h3>
-                <p className="text-xs text-gray-500">Every single joint, seal, track link and hydraulic hose is rigorously checked and documented by certified experts.</p>
-              </div>
-              <div className="p-6 bg-[#111625]/60 border border-gray-800 rounded-2xl space-y-3">
-                <Anchor size={32} className="text-blue-500" />
-                <h3 className="text-base font-extrabold text-white">Secure Sea Freight Loading</h3>
-                <p className="text-xs text-gray-500">Experienced lashing and container/flat rack fixation teams. Absolute safety during maritime transport.</p>
-              </div>
-              <div className="p-6 bg-[#111625]/60 border border-gray-800 rounded-2xl space-y-3">
-                <Phone size={32} className="text-emerald-500" />
-                <h3 className="text-base font-extrabold text-white">24/7 B2B Multilingual Support</h3>
-                <p className="text-xs text-gray-500">Dedicated foreign trade account managers speaking English, Russian, Spanish, and French to escort your business.</p>
-              </div>
-              <div className="p-6 bg-[#111625]/60 border border-gray-800 rounded-2xl space-y-3">
-                <Award size={32} className="text-purple-500" />
-                <h3 className="text-base font-extrabold text-white">Original Brands Only</h3>
-                <p className="text-xs text-gray-500">We do not deal with refurbished, reconstructed or imitation-brand hydraulic components. 100% genuine guaranteed.</p>
+            <div style={{ gridColumn: 'span 5' }} className="about-img-col">
+              <div style={{ border: '1px solid rgba(212, 175, 55, 0.15)', padding: '12px', backgroundColor: '#0d0d0d', borderRadius: '12px' }}>
+                <img
+                  src="/images/carousel_inventory.webp"
+                  alt="Pre-owned Excavator Fleet Storage Yard"
+                  style={{ width: '100%', height: 'auto', borderRadius: '6px' }}
+                />
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Global B2B Inquiry Form */}
-      <section id="contact" className="py-20 max-w-4xl mx-auto px-4">
-        <div className="bg-[#111625] border border-gray-800 p-8 rounded-3xl space-y-6 relative">
-          <div className="absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-amber-500/20 to-transparent"></div>
-          
-          <div className="text-center space-y-2">
-            <h2 className="text-2xl sm:text-3xl font-black text-white">Request Global Wholesale Quote</h2>
-            <p className="text-gray-400 text-xs max-w-md mx-auto">
-              Looking for FOB / CIF price for multiple units or specific models? Submit your inquiry, and our machinery export expert will contact you in 4 hours.
+      {/* RFQ / Sourcing Form Section */}
+      <section id="contact" className="section" style={{ backgroundColor: '#0a0a0a', borderTop: '1px solid rgba(212, 175, 55, 0.08)' }}>
+        <div className="container">
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', gap: '40px', alignItems: 'center' }} className="grid-about">
+            <div style={{ gridColumn: 'span 5' }} className="about-text-col">
+              <span style={{ color: '#d4af37', fontSize: '0.8rem', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', display: 'block', marginBottom: '10px' }}>DIRECT B2B CHANNEL</span>
+              <h2 style={{ fontSize: '2.5rem', fontWeight: 700, color: '#fff', marginBottom: '20px', fontFamily: '"Playfair Display", serif' }}>
+                Request On-Site <span style={{ color: '#d4af37', fontStyle: 'italic' }}>CIF/FOB Pricing</span>
+              </h2>
+              <p style={{ color: '#a0a0a0', lineHeight: '1.7', fontSize: '0.95rem', marginBottom: '32px' }}>
+                Submit your specific fleet or single machinery requests. Our expert export coordinators will calibrate shipping volume weights and deliver customized quotes within 12 hours.
+              </p>
+              
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                  <ShieldCheck size={24} style={{ color: '#d4af37' }} />
+                  <span style={{ fontSize: '0.9rem', color: '#a0a0a0' }}>SGS Verified Yard Exporter</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                  <ShieldCheck size={24} style={{ color: '#d4af37' }} />
+                  <span style={{ fontSize: '0.9rem', color: '#a0a0a0' }}>Guaranteed Original Engine & Hydraulic Pump</span>
+                </div>
+              </div>
+            </div>
+
+            <div style={{ gridColumn: 'span 7' }} className="about-img-col">
+              <div style={{
+                backgroundColor: '#0d0d0d',
+                border: '1px solid rgba(212, 175, 55, 0.15)',
+                borderRadius: '16px',
+                padding: '40px',
+                boxShadow: '0 20px 50px rgba(0,0,0,0.8)'
+              }}>
+                {isSubmitted ? (
+                  <div style={{ textAlign: 'center', padding: '40px 0' }}>
+                    <div style={{ display: 'inline-flex', padding: '16px', backgroundColor: 'rgba(212, 175, 55, 0.05)', border: '1px solid #d4af37', borderRadius: '50%', color: '#d4af37', marginBottom: '24px' }}>
+                      <CheckCircle size={36} />
+                    </div>
+                    <h3 style={{ fontSize: '1.6rem', color: '#fff', fontWeight: 700, marginBottom: '12px', fontFamily: '"Playfair Display", serif' }}>Inquiry Submitted Successfully!</h3>
+                    <p style={{ color: '#a0a0a0', fontSize: '0.95rem', lineHeight: '1.6', maxWidth: '400px', margin: '0 auto' }}>
+                      Thank you. Our machinery export coordinator will contact you on your registered business email and WhatsApp within 4 hours with full tiered CIF/FOB pricing.
+                    </p>
+                  </div>
+                ) : (
+                  <form onSubmit={handleRfqSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '20px' }} className="grid-about">
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                        <label style={{ fontSize: '0.75rem', fontWeight: 700, color: '#666', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Target Product Brand</label>
+                        <select
+                          value={productType}
+                          onChange={(e) => setProductType(e.target.value)}
+                          style={{ backgroundColor: '#111', border: '1px solid rgba(212,175,55,0.15)', borderRadius: '4px', padding: '12px', color: '#fff', fontSize: '0.9rem', outline: 'none' }}
+                        >
+                          <option>Caterpillar Excavators</option>
+                          <option>Komatsu Excavators</option>
+                          <option>Hitachi Excavators</option>
+                          <option>Sany Excavators</option>
+                          <option>Doosan Excavators</option>
+                          <option>Kubota Excavators</option>
+                        </select>
+                      </div>
+
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                        <label style={{ fontSize: '0.75rem', fontWeight: 700, color: '#666', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Tonnage Tier</label>
+                        <select
+                          value={tonnage}
+                          onChange={(e) => setTonnage(e.target.value)}
+                          style={{ backgroundColor: '#111', border: '1px solid rgba(212,175,55,0.15)', borderRadius: '4px', padding: '12px', color: '#fff', fontSize: '0.9rem', outline: 'none' }}
+                        >
+                          <option>Mini (1 - 6 Tons)</option>
+                          <option>Medium (12 - 15 Tons)</option>
+                          <option>Standard (20 - 24 Tons)</option>
+                          <option>Heavy / Mining (30+ Tons)</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '20px' }} className="grid-about">
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                        <label style={{ fontSize: '0.75rem', fontWeight: 700, color: '#666', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Business Email*</label>
+                        <input
+                          type="email"
+                          required
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          placeholder="e.g. james@heavyimport.com"
+                          style={{ backgroundColor: '#111', border: '1px solid rgba(212,175,55,0.15)', borderRadius: '4px', padding: '12px', color: '#fff', fontSize: '0.9rem', outline: 'none' }}
+                        />
+                      </div>
+
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                        <label style={{ fontSize: '0.75rem', fontWeight: 700, color: '#666', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Port of Delivery</label>
+                        <input
+                          type="text"
+                          value={port}
+                          onChange={(e) => setPort(e.target.value)}
+                          placeholder="e.g. Port of Rotterdam"
+                          style={{ backgroundColor: '#111', border: '1px solid rgba(212,175,55,0.15)', borderRadius: '4px', padding: '12px', color: '#fff', fontSize: '0.9rem', outline: 'none' }}
+                        />
+                      </div>
+                    </div>
+
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                      <label style={{ fontSize: '0.75rem', fontWeight: 700, color: '#666', textTransform: 'uppercase', letterSpacing: '0.1em' }}>WhatsApp / Phone</label>
+                      <input
+                        type="text"
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
+                        placeholder="e.g. +1 (555) 019-2834"
+                        style={{ backgroundColor: '#111', border: '1px solid rgba(212,175,55,0.15)', borderRadius: '4px', padding: '12px', color: '#fff', fontSize: '0.9rem', outline: 'none' }}
+                      />
+                    </div>
+
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                      <label style={{ fontSize: '0.75rem', fontWeight: 700, color: '#666', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Message / Custom Specifications</label>
+                      <textarea
+                        rows={4}
+                        value={notes}
+                        onChange={(e) => setNotes(e.target.value)}
+                        placeholder="Provide model specifications, target year, maximum hours, or project details..."
+                        style={{ backgroundColor: '#111', border: '1px solid rgba(212,175,55,0.15)', borderRadius: '4px', padding: '12px', color: '#fff', fontSize: '0.9rem', outline: 'none', resize: 'none' }}
+                      />
+                    </div>
+
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                      <label style={{ fontSize: '0.75rem', fontWeight: 700, color: '#666', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Attach Tender / Specification PDF</label>
+                      <div 
+                        onClick={() => fileInputRef.current?.click()}
+                        style={{ border: '1px dashed rgba(212,175,55,0.3)', borderRadius: '4px', padding: '20px', textAlign: 'center', cursor: 'pointer', transition: 'all 0.2s' }}
+                        onMouseEnter={(e)=>e.currentTarget.style.borderColor='#d4af37'}
+                        onMouseLeave={(e)=>e.currentTarget.style.borderColor='rgba(212,175,55,0.3)'}
+                      >
+                        <UploadCloud size={24} style={{ color: '#d4af37', margin: '0 auto 8px' }} />
+                        <span style={{ fontSize: '0.85rem', color: '#a0a0a0', display: 'block' }}>
+                          {fileName ? `Attached: ${fileName}` : 'Click to Upload Project Dieline / Spec File'}
+                        </span>
+                        <input type="file" ref={fileInputRef} onChange={handleFileChange} style={{ display: 'none' }} />
+                      </div>
+                    </div>
+
+                    <button 
+                      type="submit" 
+                      className="btn btn-primary"
+                      disabled={isSubmitting}
+                      style={{ padding: '14px', width: '100%', fontSize: '0.95rem', borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
+                    >
+                      {isSubmitting ? 'Sending Request...' : 'Request Best CIF Pricing Quote'}
+                      <Send size={16} />
+                    </button>
+                  </form>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer Area */}
+      <footer style={{ backgroundColor: '#070b13', borderTop: '1px solid rgba(212, 175, 55, 0.08)', padding: '60px 0 30px', color: '#a0a0a0' }}>
+        <div className="container grid-about" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '40px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+            <div style={{ fontSize: '1.25rem', fontWeight: 700, letterSpacing: '0.12em', color: '#fff' }}>
+              EXCAVATOR<span style={{ color: '#d4af37' }}>PRO</span>
+            </div>
+            <p style={{ fontSize: '0.85rem', lineHeight: '1.6', color: '#555', margin: 0 }}>
+              Premium Used Excavators Global Supplier. Over 15 years of construction equipment exporting experience. We guarantee machinery condition with transparent inspection reports.
             </p>
           </div>
 
-          <form onSubmit={(e) => e.preventDefault()} className="space-y-4">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="space-y-1">
-                <label className="text-xs font-bold text-gray-400 uppercase">Your Name</label>
-                <input 
-                  type="text" 
-                  placeholder="e.g. James Bryant" 
-                  className="w-full bg-[#0b0f19] border border-gray-800 focus:border-amber-500 text-white rounded-lg px-4 py-3 text-sm focus:outline-none transition-colors"
-                />
-              </div>
-              <div className="space-y-1">
-                <label className="text-xs font-bold text-gray-400 uppercase">Business Email</label>
-                <input 
-                  type="email" 
-                  placeholder="e.g. james@heavyimport.com" 
-                  className="w-full bg-[#0b0f19] border border-gray-800 focus:border-amber-500 text-white rounded-lg px-4 py-3 text-sm focus:outline-none transition-colors"
-                  required
-                />
-              </div>
-            </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            <h3 style={{ fontSize: '0.9rem', fontWeight: 700, color: '#fff', textTransform: 'uppercase', letterSpacing: '0.05em', margin: 0 }}>Quick Links</h3>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '0.85rem' }}>
+              <li><Link href="/" style={{ color: 'inherit', textDecoration: 'none' }} className="hover-gold">Home Landing</Link></li>
+              <li><Link href="/blog" style={{ color: 'inherit', textDecoration: 'none' }} className="hover-gold">Guides Blog</Link></li>
+              <li><Link href="/news" style={{ color: 'inherit', textDecoration: 'none' }} className="hover-gold">Company News</Link></li>
+              <li><Link href="/about" style={{ color: 'inherit', textDecoration: 'none' }} className="hover-gold">Yard Certification</Link></li>
+            </ul>
+          </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="space-y-1">
-                <label className="text-xs font-bold text-gray-400 uppercase">WhatsApp / Phone</label>
-                <input 
-                  type="text" 
-                  placeholder="e.g. +1 (555) 019-2834" 
-                  className="w-full bg-[#0b0f19] border border-gray-800 focus:border-amber-500 text-white rounded-lg px-4 py-3 text-sm focus:outline-none transition-colors"
-                />
-              </div>
-              <div className="space-y-1">
-                <label className="text-xs font-bold text-gray-400 uppercase">Destination Port</label>
-                <input 
-                  type="text" 
-                  placeholder="e.g. Port of Rotterdam, Netherlands" 
-                  className="w-full bg-[#0b0f19] border border-gray-800 focus:border-amber-500 text-white rounded-lg px-4 py-3 text-sm focus:outline-none transition-colors"
-                />
-              </div>
-            </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            <h3 style={{ fontSize: '0.9rem', fontWeight: 700, color: '#fff', textTransform: 'uppercase', letterSpacing: '0.05em', margin: 0 }}>Popular Brands</h3>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '0.85rem', color: '#555' }}>
+              <li>Caterpillar Excavators (CAT)</li>
+              <li>Komatsu Hydraulic Series</li>
+              <li>Sany High Performance</li>
+              <li>Hitachi Premium Diggers</li>
+            </ul>
+          </div>
 
-            <div className="space-y-1">
-              <label className="text-xs font-bold text-gray-400 uppercase">Specify Excavator Model or Purchase Requirements</label>
-              <textarea 
-                rows={4} 
-                placeholder="I am looking for a 20-ton CAT or Komatsu excavator with usage hours under 4000h. Please quote CIF prices." 
-                className="w-full bg-[#0b0f19] border border-gray-800 focus:border-amber-500 text-white rounded-lg px-4 py-3 text-sm focus:outline-none transition-colors"
-              ></textarea>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            <h3 style={{ fontSize: '0.9rem', fontWeight: 700, color: '#fff', textTransform: 'uppercase', letterSpacing: '0.05em', margin: 0 }}>Guaranteed Quality</h3>
+            <div style={{ display: 'flex', gap: '10px', fontSize: '0.85rem', color: '#555' }}>
+              <Award size={16} style={{ color: '#d4af37', flexShrink: 0, marginTop: '2px' }} />
+              <p style={{ margin: 0 }}>All excavators undergo a rigorous 120-point inspection before loading.</p>
             </div>
-
-            <div className="pt-2">
-              <button 
-                type="button" 
-                className="w-full bg-amber-500 hover:bg-amber-400 text-black font-extrabold text-sm py-4 rounded-xl transition-all shadow-xl shadow-amber-500/10 hover:shadow-amber-500/20"
-                onClick={() => alert('Inquiry received successfully! Our machinery export specialist will contact you in 4 hours.')}
-              >
-                Submit Professional Inquiry Sheet
-              </button>
+            <div style={{ display: 'flex', gap: '10px', fontSize: '0.85rem', color: '#555' }}>
+              <ShieldCheck size={16} style={{ color: '#d4af37', flexShrink: 0, marginTop: '2px' }} />
+              <p style={{ margin: 0 }}>Official customs clearance declarations and SGS certification assistance provided.</p>
             </div>
-          </form>
-
-          {/* Contact Direct Phone Info */}
-          <div className="pt-4 border-t border-gray-900 grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs text-gray-500 text-center sm:text-left">
-            <span className="flex items-center justify-center sm:justify-start"><Phone size={14} className="text-amber-500 mr-2" /> Direct B2B Line: +86-138-xxxx-xxxx</span>
-            <span className="flex items-center justify-center sm:justify-start"><Mail size={14} className="text-amber-500 mr-2" /> Email: export@heavyexpo.com</span>
           </div>
         </div>
-      </section>
-    </div>
+
+        <div className="container" style={{ borderTop: '1px solid rgba(255,255,255,0.04)', marginTop: '40px', paddingTop: '30px', display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '16px', fontSize: '0.8rem', color: '#444' }}>
+          <p style={{ margin: 0 }}>&copy; {new Date().getFullYear()} EXCAVATOR PRO Global Export. All rights reserved.</p>
+          <div style={{ display: 'flex', gap: '20px' }}>
+            <span>Privacy Policy</span>
+            <span>Terms of Service</span>
+          </div>
+        </div>
+      </footer>
+
+      <FloatingContact />
+
+      <style jsx global>{`
+        @media (max-width: 768px) {
+          .grid-about {
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 30px !important;
+          }
+          .about-text-col, .about-img-col {
+            grid-column: span 12 !important;
+            width: 100% !important;
+          }
+        }
+      `}</style>
+    </main>
   );
 }

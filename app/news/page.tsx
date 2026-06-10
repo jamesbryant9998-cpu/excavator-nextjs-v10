@@ -1,67 +1,277 @@
-import { Newspaper, Calendar, Tag, ArrowRight } from "lucide-react";
-import newsData from "../../data/news.json";
+'use client';
 
-export default function NewsList() {
+import Link from 'next/link';
+import Image from 'next/image';
+import { useState } from 'react';
+import { Calendar, Tag, ArrowRight, Sparkles, Send } from 'lucide-react';
+import Header from '../../components/Header';
+import FloatingContact from '../../components/FloatingContact';
+import newsData from '../../data/news.json';
+
+export default function NewsPage() {
+  const [email, setEmail] = useState('');
+  const [subscribed, setSubscribed] = useState(false);
+
+  const handleSubscribe = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (email.trim()) {
+      setSubscribed(true);
+      setEmail('');
+    }
+  };
+
   return (
-    <div className="bg-[#0b0f19] py-12 min-h-screen">
-      <div className="max-w-7xl mx-auto px-4 space-y-12">
-        {/* Header Banner */}
-        <div className="border-b border-gray-950 pb-8 space-y-2">
-          <div className="flex items-center space-x-2 text-amber-500 text-xs font-black tracking-wide uppercase">
-            <Newspaper size={14} className="text-amber-500" />
-            <span>Heavy Equipment Newsroom</span>
+    <main style={{ minHeight: '100vh', position: 'relative', backgroundColor: '#050505', color: '#fff', paddingTop: '120px' }}>
+      <Header />
+
+      {/* Hero Header Section */}
+      <section style={{ padding: '80px 0 50px', borderBottom: '1px solid rgba(212, 175, 55, 0.08)' }}>
+        <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px' }}>
+          <div style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'center' }}>
+            <span style={{ 
+              color: '#d4af37', 
+              fontSize: '0.85rem', 
+              fontWeight: 600, 
+              letterSpacing: '0.25em', 
+              textTransform: 'uppercase', 
+              display: 'inline-flex', 
+              alignItems: 'center', 
+              gap: '8px',
+              marginBottom: '16px' 
+            }}>
+              <Sparkles size={12} />
+              EXCAVATOR PRO NEWSROOM
+            </span>
+            <h1 style={{ 
+              fontSize: '3rem', 
+              fontWeight: 700, 
+              letterSpacing: '0.04em', 
+              lineHeight: '1.2', 
+              marginBottom: '20px',
+              fontFamily: '"Playfair Display", serif'
+            }}>
+              Company Updates & <span style={{ color: '#d4af37', fontStyle: 'italic' }}>Announcements</span>
+            </h1>
+            <p style={{ color: '#a0a0a0', fontSize: '1.1rem', lineHeight: '1.7', margin: 0 }}>
+              Stay informed with our latest container stock arrivals, SGS audits, custom declaration policies, and heavy equipment logistics expansions worldwide.
+            </p>
           </div>
-          <h1 className="text-3xl sm:text-4xl font-black text-white tracking-tight">
-            Company Updates & <span className="text-amber-500">Industry News</span>
-          </h1>
-          <p className="text-gray-400 text-sm max-w-xl">
-            Keep up with our latest stock arrivals, corporate certification, logistics enhancements, global customs declaration policy updates, and hybrid machinery trends.
-          </p>
         </div>
+      </section>
 
-        {/* News Catalog Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {newsData.map((n) => (
-            <div key={n.id} className="bg-[#111625] border border-gray-800 hover:border-amber-500/30 rounded-2xl overflow-hidden group transition-all hover:-translate-y-1 shadow-xl hover:shadow-2xl flex flex-col justify-between">
-              {/* Image Banner */}
-              <div className="relative h-52 bg-gray-900 overflow-hidden">
-                <img 
-                  src={n.image} 
-                  alt={n.title} 
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute top-3 left-3 bg-amber-500 text-black text-[9px] font-black px-2 py-0.5 rounded uppercase tracking-wider">
-                  {n.category}
-                </div>
-              </div>
-
-              {/* Specs & Content Preview */}
-              <div className="p-6 flex-grow flex flex-col justify-between space-y-6">
-                <div className="space-y-3">
-                  <div className="flex items-center space-x-4 text-[10px] text-gray-500">
-                    <span className="flex items-center"><Calendar size={12} className="mr-1 text-amber-500" /> {n.date}</span>
-                    <span className="flex items-center"><Tag size={12} className="mr-1 text-amber-500" /> {n.category.split(" ")[0]}</span>
+      {/* News Grid Section */}
+      <section style={{ padding: '80px 0' }}>
+        <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px' }}>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(360px, 1fr))',
+            gap: '40px 30px'
+          }}>
+            {newsData.map((article) => (
+              <article 
+                key={article.id}
+                style={{
+                  backgroundColor: '#0d0d0d',
+                  border: '1px solid rgba(212, 175, 55, 0.08)',
+                  borderRadius: '12px',
+                  overflow: 'hidden',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-8px)';
+                  e.currentTarget.style.borderColor = 'rgba(212, 175, 55, 0.25)';
+                  e.currentTarget.style.boxShadow = '0 15px 35px rgba(0,0,0,0.6)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'none';
+                  e.currentTarget.style.borderColor = 'rgba(212, 175, 55, 0.08)';
+                  e.currentTarget.style.boxShadow = 'none';
+                }}
+              >
+                {/* Article Image Container */}
+                <div style={{ height: '230px', overflow: 'hidden', position: 'relative', backgroundColor: '#141414' }}>
+                  <Image 
+                    src={article.image} 
+                    alt={article.title} 
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    style={{
+                      objectFit: 'cover',
+                      display: 'block',
+                      transition: 'transform 0.5s ease-out'
+                    }}
+                    onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
+                    onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+                  />
+                  <div style={{
+                    position: 'absolute',
+                    top: '15px',
+                    left: '15px',
+                    backgroundColor: 'rgba(5, 5, 5, 0.85)',
+                    border: '1px solid rgba(212, 175, 55, 0.3)',
+                    color: '#d4af37',
+                    fontSize: '0.75rem',
+                    fontWeight: 600,
+                    letterSpacing: '0.05em',
+                    padding: '6px 12px',
+                    borderRadius: '4px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                    backdropFilter: 'blur(5px)'
+                  }}>
+                    <Tag size={12} />
+                    {article.category}
                   </div>
-                  
-                  <h3 className="text-lg font-black text-white group-hover:text-amber-500 transition-colors line-clamp-2 min-h-[3.5rem]">
-                    {n.title}
-                  </h3>
-                  
-                  <p className="text-xs text-gray-400 leading-relaxed line-clamp-3">
-                    {n.summary}
-                  </p>
                 </div>
 
-                <div className="pt-4 border-t border-gray-900">
-                  <a href={`/news/${n.slug}`} className="inline-flex items-center text-xs font-bold text-amber-500 hover:text-amber-400 group/link">
-                    Read Full Announcement <ArrowRight size={14} className="ml-1 group-hover/link:translate-x-1 transition-transform" />
-                  </a>
+                {/* Article Info */}
+                <div style={{ padding: '24px', display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
+                  <div style={{ 
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    gap: '6px', 
+                    color: '#666', 
+                    fontSize: '0.8rem', 
+                    marginBottom: '12px' 
+                  }}>
+                    <Calendar size={12} style={{ color: '#d4af37' }} />
+                    {article.date}
+                  </div>
+
+                  <h2 style={{
+                    fontSize: '1.25rem',
+                    fontWeight: 600,
+                    lineHeight: '1.4',
+                    marginBottom: '12px',
+                    color: '#fff',
+                    fontFamily: '"Playfair Display", serif',
+                    transition: 'color 0.2s'
+                  }}>
+                    <Link href={`/news/${article.slug}`} style={{ color: 'inherit', textDecoration: 'none' }} onMouseEnter={(e) => e.currentTarget.style.color = '#d4af37'} onMouseLeave={(e) => e.currentTarget.style.color = 'inherit'}>
+                      {article.title}
+                    </Link>
+                  </h2>
+
+                  <p style={{
+                    color: '#888',
+                    fontSize: '0.88rem',
+                    lineHeight: '1.6',
+                    marginBottom: '20px',
+                    flexGrow: 1
+                  }}>
+                    {article.summary}
+                  </p>
+
+                  <Link href={`/news/${article.slug}`} style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '8px',
+                      color: '#d4af37',
+                      textDecoration: 'none',
+                      fontSize: '0.85rem',
+                      fontWeight: 600,
+                      letterSpacing: '0.05em',
+                      textTransform: 'uppercase',
+                      transition: 'gap 0.2s'
+                    }} onMouseEnter={(e) => e.currentTarget.style.gap = '12px'} onMouseLeave={(e) => e.currentTarget.style.gap = '8px'}>
+                    Read Announcement
+                    <ArrowRight size={14} />
+                  </Link>
                 </div>
-              </div>
-            </div>
-          ))}
+              </article>
+            ))}
+          </div>
         </div>
-      </div>
-    </div>
+      </section>
+
+      {/* Newsletter Subscription Section */}
+      <section style={{ 
+        padding: '80px 0', 
+        backgroundColor: '#0a0a0a', 
+        borderTop: '1px solid rgba(212, 175, 55, 0.08)' 
+      }}>
+        <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px' }}>
+          <div style={{ 
+            maxWidth: '650px', 
+            margin: '0 auto', 
+            textAlign: 'center',
+            backgroundColor: '#050505',
+            border: '1px solid rgba(212, 175, 55, 0.12)',
+            borderRadius: '16px',
+            padding: '50px 40px',
+            boxShadow: '0 10px 30px rgba(0,0,0,0.5)'
+          }}>
+            <h3 style={{ 
+              fontSize: '1.8rem', 
+              fontWeight: 700, 
+              marginBottom: '12px',
+              fontFamily: '"Playfair Display", serif'
+            }}>
+              Join the <span style={{ color: '#d4af37' }}>Excavator Club</span>
+            </h3>
+            <p style={{ color: '#a0a0a0', fontSize: '0.95rem', lineHeight: '1.6', marginBottom: '30px' }}>
+              Subscribe to receive curated monthly updates on pre-owned heavy equipment stock alerts, port CIF rate trends, and machinery maintenance checklists.
+            </p>
+
+            {subscribed ? (
+              <div style={{ 
+                backgroundColor: 'rgba(212, 175, 55, 0.05)', 
+                border: '1px solid rgba(212, 175, 55, 0.2)', 
+                padding: '16px', 
+                borderRadius: '6px', 
+                color: '#d4af37',
+                fontWeight: 500,
+                fontSize: '0.95rem'
+              }}>
+                ✓ Thank you for subscribing! Our next premium export market report will arrive shortly.
+              </div>
+            ) : (
+              <form onSubmit={handleSubscribe} style={{ display: 'flex', gap: '10px' }}>
+                <input 
+                  type="email" 
+                  placeholder="Enter your professional email" 
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  style={{
+                    flexGrow: 1,
+                    backgroundColor: '#111',
+                    border: '1px solid rgba(212, 175, 55, 0.15)',
+                    borderRadius: '4px',
+                    padding: '14px 20px',
+                    color: '#fff',
+                    fontSize: '0.9rem',
+                    outline: 'none',
+                    transition: 'border-color 0.2s'
+                  }}
+                  onFocus={(e) => e.target.style.borderColor = '#d4af37'}
+                  onBlur={(e) => e.target.style.borderColor = 'rgba(212, 175, 55, 0.15)'}
+                />
+                <button 
+                  type="submit" 
+                  className="btn btn-primary"
+                  style={{ 
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    gap: '8px', 
+                    padding: '14px 28px',
+                    fontSize: '0.9rem',
+                    borderRadius: '4px'
+                  }}
+                >
+                  Subscribe
+                  <Send size={14} />
+                </button>
+              </form>
+            )}
+          </div>
+        </div>
+      </section>
+
+      <FloatingContact />
+    </main>
   );
 }
