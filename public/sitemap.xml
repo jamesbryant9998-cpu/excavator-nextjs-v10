@@ -386,6 +386,16 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://excavator-nextjs-v10-jamesbryant9998-3760s-projects.vercel.app/news/volvo-ec-series-stock-arrival-2026</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://excavator-nextjs-v10-jamesbryant9998-3760s-projects.vercel.app/news/middle-east-heavy-machinery-export-peak</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://excavator-nextjs-v10-jamesbryant9998-3760s-projects.vercel.app/blog/how-to-inspect-used-excavator</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -422,6 +432,16 @@
   </url>
   <url>
     <loc>https://excavator-nextjs-v10-jamesbryant9998-3760s-projects.vercel.app/blog/used-wheeled-vs-crawler-excavator</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://excavator-nextjs-v10-jamesbryant9998-3760s-projects.vercel.app/blog/technical-breakdown-volvo-ec210-vs-ec220</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://excavator-nextjs-v10-jamesbryant9998-3760s-projects.vercel.app/blog/winter-maintenance-excavator-hydraulic-systems</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
