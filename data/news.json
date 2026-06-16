@@ -98,5 +98,25 @@
     "category": "Market News",
     "image": "/images/news12.webp",
     "content": "The demand for high-quality pre-owned construction machinery in the Middle East has reached an unprecedented peak in the second quarter of 2026. HEAVYEXPO reports an 85% surge in excavator exports to major regional hubs, with Saudi Arabia's Vision 2030 projects and UAE urban expansions being the primary drivers. Most requested are 20-ton and 30-ton class excavators with high-ambient cooling packages. To support this demand, we have increased our dedicated logistics desk staff and secured guaranteed space on Ro-Ro and container vessels departing Shanghai weekly. We provide full customs documentation and site-ready mechanical certifications for all Middle Eastern B2B shipments."
+  },
+  {
+    "id": "NEWS013",
+    "slug": "heavyexpo-ai-inspection-lab-launch-2026",
+    "title": "Smart Sourcing: HEAVYEXPO Launches AI-Powered Hydraulic Real-Time Inspection Lab",
+    "date": "June 15, 2026",
+    "summary": "We have integrated high-precision AI sensors and 3D modeling into our Shanghai yard to provide buyers with transparent, real-time mechanical health reports.",
+    "category": "Tech Innovation",
+    "image": "/images/news13.webp",
+    "content": "In a move to set new standards for transparency in the used heavy machinery industry, HEAVYEXPO has officially launched its Smart Inspection Lab in Shanghai. By utilizing industrial AI sensors and real-time hydraulic flow analysis, we can now generate a 'Digital Twin' of every excavator's internal systems. This allows B2B buyers to remotely view 3D diagnostic models and pressure test data before shipment. This technology eliminates the uncertainty often associated with pre-owned equipment, ensuring every Caterpillar or Sany machine leaving our yard is verified for long-term operational uptime."
+  },
+  {
+    "id": "NEWS014",
+    "slug": "shanghai-port-export-efficiency-upgrade-2026",
+    "title": "Streamlined Logistics: New High-Volume Export Protocol at Shanghai Port Terminal",
+    "date": "June 16, 2026",
+    "summary": "Our logistics alliance has established a priority berthing and loading protocol, shortening heavy excavator export cycles by an average of 5 working days.",
+    "category": "Global Logistics",
+    "image": "/images/news14.webp",
+    "content": "To support our rapidly growing global customer base, HEAVYEXPO has successfully negotiated a dedicated 'Green Lane' export protocol with key Shanghai port terminal operators. This milestone agreement includes priority yard space and streamlined customs pre-clearance for heavy-lift Flat Rack containers. As a result, the average lead time from stock purchase to vessel departure has been reduced by 5 days. This strategic logistical upgrade ensures that contractors in Southeast Asia, Africa, and the Middle East receive their certified equipment faster than ever before, minimizing project delay risks."
   }
 ]

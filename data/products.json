@@ -1566,5 +1566,37 @@
     "bucketCapacity": "2.2 m³",
     "undercarriage": "95% New",
     "image": "/images/used-cat-336d-excavator.webp"
+  },
+  {
+    "id": "SANY099",
+    "slug": "used-sany-sy485h-mining-excavator",
+    "model": "Sany SY485H Mining Edition",
+    "brand": "Sany",
+    "price": 145000,
+    "year": 2020,
+    "hours": 1200,
+    "weight": "49.5 Tons",
+    "condition": "Superb 95% new large heavy mining rig, extreme breakout torque, reinforced tracks and boom for high-intensity work, factory original condition.",
+    "engine": "Isuzu 6WG1XKSC-01",
+    "power": "300 kW (402 HP)",
+    "bucketCapacity": "2.8 m³",
+    "undercarriage": "95% New",
+    "image": "/images/used-sany-sy485h-mining-excavator.webp"
+  },
+  {
+    "id": "CAT100",
+    "slug": "used-cat-349d-mining-excavator",
+    "model": "Caterpillar 349D Heavy Duty",
+    "brand": "Caterpillar",
+    "price": 165000,
+    "year": 2019,
+    "hours": 1500,
+    "weight": "48.5 Tons",
+    "condition": "Immaculate 95% new mining legend, massive breakout force, original yellow paint, certified CAT engine ready for heavy-duty earthmoving.",
+    "engine": "CAT C13 ACERT",
+    "power": "283 kW (380 HP)",
+    "bucketCapacity": "3.1 m³",
+    "undercarriage": "95% New",
+    "image": "/images/used-cat-349d-mining-excavator.webp"
   }
 ]
