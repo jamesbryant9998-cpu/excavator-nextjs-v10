@@ -1,5 +1,6 @@
 import "./globals.css";
 import { HardHat, Compass, Mail, Phone, Clock, Award, ShieldCheck, Globe } from "lucide-react";
+import WhatsAppButton from "../components/WhatsAppButton";
 
 export const metadata = {
   title: "HEAVYEXPO | Global Premium Used Excavators Export",
@@ -194,6 +195,7 @@ export default function RootLayout({
             </div>
           </div>
         </footer>
+        <WhatsAppButton />
       </body>
     </html>
   );
