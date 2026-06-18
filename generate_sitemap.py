@@ -1,6 +1,6 @@
 import json, os
 
-domain = 'https://excavator-nextjs-v10-jamesbryant9998-3760s-projects.vercel.app'
+domain = 'https://heavymachinerypro.com'
 urls = [domain + '/']
 
 # Add products

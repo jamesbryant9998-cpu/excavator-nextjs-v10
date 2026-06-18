@@ -37,7 +37,7 @@ export default function Product({ params }: PageProps) {
     "@context": "https://schema.org/",
     "@type": "Product",
     "name": product.model,
-    "image": `https://excavator-nextjs-v10-jamesbryant9998-3760s-projects.vercel.app${product.image}`,
+    "image": `https://heavymachinerypro.com${product.image}`,
     "description": product.condition,
     "brand": {
       "@type": "Brand",
@@ -49,7 +49,7 @@ export default function Product({ params }: PageProps) {
       "price": product.price > 0 ? product.price : "Contact for Quote",
       "itemCondition": "https://schema.org/UsedCondition",
       "availability": "https://schema.org/InStock",
-      "url": `https://excavator-nextjs-v10-jamesbryant9998-3760s-projects.vercel.app/products/${product.slug}`
+      "url": `https://heavymachinerypro.com/products/${product.slug}`
     }
   };
 
