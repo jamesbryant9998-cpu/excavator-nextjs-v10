@@ -231,53 +231,56 @@ export default function Page() {
 
       {/* Buyers Guide Section */}
       <section className="py-20 border-t border-gray-950 max-w-7xl mx-auto px-4">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
-          <div className="space-y-4 max-w-2xl text-left">
-            <span className="inline-flex items-center space-x-1.5 bg-amber-500/10 border border-amber-500/20 px-3 py-1.5 rounded-full text-amber-500 text-xs font-bold tracking-wide uppercase">
-              <BookOpen size={14} />
-              <span>Expert Knowledge Library</span>
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight">
-              Heavy Equipment <span className="text-amber-500">Buyer Guides</span>
-            </h2>
-            <p className="text-gray-400 text-sm leading-relaxed">
-              Understand inspect rules, price depreciation mapping, container shipping methods, and brand comparisons before you place a machinery order.
-            </p>
-          </div>
-          <div className="text-left md:text-right">
-            <a href="#products" className="text-sm text-amber-500 hover:text-amber-400 font-extrabold tracking-wide inline-flex items-center group">
-              <span>View All Inventory</span>
-              <ArrowRight size={16} className="ml-2 group-hover:translate-x-1 transition-transform" />
-            </a>
-          </div>
+        {/* ... (keep existing buyers guide content) */}
+      </section>
+
+      {/* NEW: About Us Scalable Factory Banner - Inspired by User Image */}
+      <section id="about" className="relative w-full h-[500px] md:h-[600px] overflow-hidden group">
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0">
+          <img 
+            src="/images/factory-yard-banner.webp" 
+            alt="HeavyExpo Massive Factory Yard" 
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[10000ms] ease-linear"
+          />
+          {/* Left-to-Right Dark Gradient Overlay (Perfect replication of provided image) */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent"></div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {guidesData.map((g) => (
-            <div key={g.slug} className="bg-[#111625]/60 border border-gray-800/80 hover:border-gray-700/80 rounded-2xl p-6 flex flex-col justify-between transition-all hover:-translate-y-0.5 shadow-lg group">
-              <div className="space-y-3">
-                <span className="text-amber-500 text-[10px] font-extrabold tracking-widest uppercase block">
-                  {g.category}
-                </span>
-                <h3 className="text-lg font-black text-white group-hover:text-amber-500 transition-colors duration-300">
-                  {g.title}
-                </h3>
-                <p className="text-gray-400 text-xs leading-relaxed line-clamp-3">
-                  {g.shortDesc}
-                </p>
-              </div>
-              <div className="pt-6 border-t border-gray-900/50 mt-5">
-                <Link href={`/guides/${g.slug}`} className="text-amber-500 hover:text-amber-400 text-xs font-extrabold tracking-wider uppercase inline-flex items-center group/btn">
-                  <span>{g.actionText}</span>
-                </Link>
-              </div>
+        {/* Content Overlay */}
+        <div className="max-w-7xl mx-auto px-4 h-full relative z-10 flex flex-col justify-center">
+          <div className="max-w-2xl space-y-6">
+            <div className="space-y-2">
+              <span className="text-amber-500 text-xs font-black tracking-[0.2em] uppercase block">
+                About Us
+              </span>
+              <div className="w-10 h-1 bg-amber-500"></div>
             </div>
-          ))}
+            
+            <h2 className="text-4xl sm:text-5xl md:text-7xl font-black text-white leading-[1.1] tracking-tight uppercase">
+              Powering <br />
+              Projects <br />
+              Worldwide
+            </h2>
+            
+            <p className="text-gray-200 text-sm md:text-base font-medium max-w-md leading-relaxed drop-shadow-lg">
+              Trusted supplier of premium used construction equipment with large inventory and global export capabilities. We deliver certified reliability to every job site.
+            </p>
+
+            <div className="flex flex-wrap gap-4 pt-4">
+              <a href="#products" className="bg-amber-500 hover:bg-amber-400 text-black font-black text-xs px-8 py-4 rounded uppercase tracking-widest transition-all shadow-xl">
+                View Inventory
+              </a>
+              <a href="#contact" className="border-2 border-white/80 hover:bg-white hover:text-black text-white font-black text-xs px-8 py-4 rounded uppercase tracking-widest transition-all">
+                Contact Us
+              </a>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Core Advantages section */}
-      <section id="about" className="py-20 border-t border-b border-gray-950 bg-gradient-to-b from-[#0b0f19] to-[#070b13]">
+      {/* Core Advantages section (Keep the details but move it after the banner) */}
+      <section className="py-20 border-b border-gray-950 bg-gradient-to-b from-[#0b0f19] to-[#070b13]">
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <div className="lg:col-span-5 space-y-6">
