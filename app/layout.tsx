@@ -3,8 +3,8 @@ import { HardHat, Compass, Mail, Phone, Clock, Award, ShieldCheck, Globe } from 
 import WhatsAppButton from "../components/WhatsAppButton";
 
 export const metadata = {
-  title: "HEAVYEXPO | Global Premium Used Excavators Export",
-  description: "Worldwide trust exporter of premium condition used excavators including Caterpillar, Komatsu, Sany, and Hitachi. 100% Inspected & Ready for Shipment.",
+  title: "HEAVY MACHINERY PRO (HMP) | Global Premium Used Equipment Supplier",
+  description: "Global trust leader in premium used excavators export, including Caterpillar, Komatsu, Volvo, Sany, and Doosan. 120-point SGS inspected, work-ready machinery for worldwide shipping.",
 };
 
 export default function RootLayout({
@@ -33,11 +33,12 @@ export default function RootLayout({
         {/* Navigation Bar */}
         <header className="sticky top-0 z-50 bg-[#0b0f19]/90 backdrop-blur-md border-b border-gray-800/80">
           <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-            <a href="/" className="flex items-center space-x-2 group">
-              <div className="p-2 bg-amber-500 text-black rounded-lg font-bold flex items-center justify-center group-hover:bg-amber-400 transition-colors">
-                <HardHat size={20} />
-              </div>
-              <span className="text-xl font-black tracking-wider text-white">HEAVY<span className="text-amber-500">EXPO</span></span>
+            <a href="/" className="flex items-center group">
+              <img 
+                src="/logo.webp" 
+                alt="HEAVY MACHINERY PRO Logo" 
+                className="h-14 md:h-16 w-auto object-contain transition-transform group-hover:scale-105"
+              />
             </a>
             
             <nav className="hidden md:flex items-center space-x-8 text-sm font-semibold">
@@ -162,14 +163,11 @@ export default function RootLayout({
         <footer className="bg-[#070b13] border-t border-gray-800 text-gray-400 py-12">
           <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
             <div className="space-y-4">
-              <div className="flex items-center space-x-2">
-                <div className="p-1.5 bg-amber-500 text-black rounded font-bold">
-                  <HardHat size={16} />
-                </div>
-                <span className="text-lg font-extrabold text-white">HEAVY<span className="text-amber-500">EXPO</span></span>
+              <div className="flex items-center">
+                <img src="/logo.webp" alt="HEAVY MACHINERY PRO Logo" className="h-12 w-auto object-contain" />
               </div>
               <p className="text-xs leading-relaxed text-gray-500">
-                Premium Used Excavators Global Supplier. Over 15 years of construction equipment exporting experience. We guarantee machinery condition with transparent inspection reports.
+                HEAVY MACHINERY PRO (HMP) — Global Premium Used Equipment Supplier. Over 15 years of construction equipment exporting experience. We guarantee machinery condition with transparent inspection reports.
               </p>
             </div>
 
@@ -208,7 +206,7 @@ export default function RootLayout({
           </div>
 
           <div className="max-w-7xl mx-auto px-4 pt-8 mt-8 border-t border-gray-900 flex flex-col sm:flex-row justify-between items-center text-xs text-gray-600">
-            <p>&copy; {new Date().getFullYear()} HEAVYEXPO Global Export. All rights reserved.</p>
+            <p>&copy; {new Date().getFullYear()} HEAVY MACHINERY PRO (HMP). All rights reserved.</p>
             <div className="flex space-x-4 mt-4 sm:mt-0">
               <span className="hover:text-amber-500 transition-colors cursor-pointer">Privacy Policy</span>
               <span>&bull;</span>
