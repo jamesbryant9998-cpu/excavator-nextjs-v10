@@ -59,9 +59,9 @@ export default function RootLayout({
                   <div className="space-y-2">
                     <h4 className="text-[10px] font-black text-amber-500 uppercase tracking-widest border-b border-gray-800 pb-1.5 mb-2">Caterpillar</h4>
                     <ul className="space-y-1 text-xs text-gray-300">
-                      <li><a href="/#products" className="hover:text-amber-500 transition-colors block py-0.5">CAT 320D (21.5T)</a></li>
-                      <li><a href="/#products" className="hover:text-amber-500 transition-colors block py-0.5">CAT 336D (36T)</a></li>
-                      <li><a href="/#products" className="hover:text-amber-500 transition-colors block py-0.5">CAT 349D (48T)</a></li>
+                      <li><a href="/products/used-cat-320d2-excavator" className="hover:text-amber-500 transition-colors block py-0.5">CAT 320D (21.5T)</a></li>
+                      <li><a href="/products/used-cat-336d2-excavator" className="hover:text-amber-500 transition-colors block py-0.5">CAT 336D (36T)</a></li>
+                      <li><a href="/products/used-cat-349gc-excavator" className="hover:text-amber-500 transition-colors block py-0.5">CAT 349D (48T)</a></li>
                       <li><a href="/#products" className="text-gray-500 text-[10px] hover:text-amber-500 transition-colors">View All CAT →</a></li>
                     </ul>
                   </div>
@@ -70,9 +70,9 @@ export default function RootLayout({
                   <div className="space-y-2">
                     <h4 className="text-[10px] font-black text-amber-500 uppercase tracking-widest border-b border-gray-800 pb-1.5 mb-2">Komatsu</h4>
                     <ul className="space-y-1 text-xs text-gray-300">
-                      <li><a href="/#products" className="hover:text-amber-500 transition-colors block py-0.5">PC200-8 (20T)</a></li>
-                      <li><a href="/#products" className="hover:text-amber-500 transition-colors block py-0.5">PC220-8 (22T)</a></li>
-                      <li><a href="/#products" className="hover:text-amber-500 transition-colors block py-0.5">PC360-7 (35T)</a></li>
+                      <li><a href="/products/used-komatsu-pc210-excavator" className="hover:text-amber-500 transition-colors block py-0.5">PC210 (21T)</a></li>
+                      <li><a href="/products/used-komatsu-pc220-excavator" className="hover:text-amber-500 transition-colors block py-0.5">PC220 (22T)</a></li>
+                      <li><a href="/products/used-komatsu-pc240lc-excavator" className="hover:text-amber-500 transition-colors block py-0.5">PC240 (24T)</a></li>
                       <li><a href="/#products" className="text-gray-500 text-[10px] hover:text-amber-500 transition-colors">View All Komatsu →</a></li>
                     </ul>
                   </div>
@@ -81,9 +81,7 @@ export default function RootLayout({
                   <div className="space-y-2">
                     <h4 className="text-[10px] font-black text-amber-500 uppercase tracking-widest border-b border-gray-800 pb-1.5 mb-2">Doosan</h4>
                     <ul className="space-y-1 text-xs text-gray-300">
-                      <li><a href="/#products" className="hover:text-amber-500 transition-colors block py-0.5">DX225LCA (22T)</a></li>
-                      <li><a href="/#products" className="hover:text-amber-500 transition-colors block py-0.5">DX300LC (30T)</a></li>
-                      <li><a href="/#products" className="hover:text-amber-500 transition-colors block py-0.5">DX500LC (50T)</a></li>
+                      <li><a href="/products/used-doosan-dx300lc-excavator" className="hover:text-amber-500 transition-colors block py-0.5">DX300LC (30T)</a></li>
                       <li><a href="/#products" className="text-gray-500 text-[10px] hover:text-amber-500 transition-colors">View All Doosan →</a></li>
                     </ul>
                   </div>
@@ -92,9 +90,8 @@ export default function RootLayout({
                   <div className="space-y-2">
                     <h4 className="text-[10px] font-black text-amber-500 uppercase tracking-widest border-b border-gray-800 pb-1.5 mb-2">Hitachi</h4>
                     <ul className="space-y-1 text-xs text-gray-300">
-                      <li><a href="/#products" className="hover:text-amber-500 transition-colors block py-0.5">ZX200-3 (20T)</a></li>
-                      <li><a href="/#products" className="hover:text-amber-500 transition-colors block py-0.5">ZX350LCH (35T)</a></li>
-                      <li><a href="/#products" className="hover:text-amber-500 transition-colors block py-0.5">ZX470H (47T)</a></li>
+                      <li><a href="/products/used-hitachi-zx200-excavator" className="hover:text-amber-500 transition-colors block py-0.5">ZX200 (20T)</a></li>
+                      <li><a href="/products/used-hitachi-zx210-excavator" className="hover:text-amber-500 transition-colors block py-0.5">ZX210 (21T)</a></li>
                       <li><a href="/#products" className="text-gray-500 text-[10px] hover:text-amber-500 transition-colors">View All Hitachi →</a></li>
                     </ul>
                   </div>
@@ -103,9 +100,9 @@ export default function RootLayout({
                   <div className="space-y-2 pt-2">
                     <h4 className="text-[10px] font-black text-amber-500 uppercase tracking-widest border-b border-gray-800 pb-1.5 mb-2">Sany</h4>
                     <ul className="space-y-1 text-xs text-gray-300">
-                      <li><a href="/#products" className="hover:text-amber-500 transition-colors block py-0.5">SY215C (21.5T)</a></li>
-                      <li><a href="/#products" className="hover:text-amber-500 transition-colors block py-0.5">SY365H (36.5T)</a></li>
-                      <li><a href="/#products" className="hover:text-amber-500 transition-colors block py-0.5">SY485H (48.5T)</a></li>
+                      <li><a href="/products/used-sany-sy65c-excavator" className="hover:text-amber-500 transition-colors block py-0.5">SY65C (6.5T)</a></li>
+                      <li><a href="/products/used-sany-sy485h-mining-excavator" className="hover:text-amber-500 transition-colors block py-0.5">SY485H (49T)</a></li>
+                      <li><a href="/#products" className="text-gray-500 text-[10px] hover:text-amber-500 transition-colors">View All Sany →</a></li>
                     </ul>
                   </div>
 
@@ -113,9 +110,9 @@ export default function RootLayout({
                   <div className="space-y-2 pt-2">
                     <h4 className="text-[10px] font-black text-amber-500 uppercase tracking-widest border-b border-gray-800 pb-1.5 mb-2">Hyundai</h4>
                     <ul className="space-y-1 text-xs text-gray-300">
-                      <li><a href="/#products" className="hover:text-amber-500 transition-colors block py-0.5">R220LC-9 (22T)</a></li>
-                      <li><a href="/#products" className="hover:text-amber-500 transition-colors block py-0.5">R330LC-9 (33T)</a></li>
-                      <li><a href="/#products" className="hover:text-amber-500 transition-colors block py-0.5">R480LC-9 (48T)</a></li>
+                      <li><a href="/products/used-hyundai-220lc-9s-excavator" className="hover:text-amber-500 transition-colors block py-0.5">R220LC-9 (22T)</a></li>
+                      <li><a href="/products/used-hyundai-335-9t-excavator" className="hover:text-amber-500 transition-colors block py-0.5">R335-9T (33.5T)</a></li>
+                      <li><a href="/#products" className="text-gray-500 text-[10px] hover:text-amber-500 transition-colors">View All Hyundai →</a></li>
                     </ul>
                   </div>
 
@@ -123,9 +120,9 @@ export default function RootLayout({
                   <div className="space-y-2 pt-2">
                     <h4 className="text-[10px] font-black text-amber-500 uppercase tracking-widest border-b border-gray-800 pb-1.5 mb-2">Volvo</h4>
                     <ul className="space-y-1 text-xs text-gray-300">
-                      <li><a href="/#products" className="hover:text-amber-500 transition-colors block py-0.5">EC210D (21T)</a></li>
-                      <li><a href="/#products" className="hover:text-amber-500 transition-colors block py-0.5">EC380D (38T)</a></li>
-                      <li><a href="/#products" className="hover:text-amber-500 transition-colors block py-0.5">EC480D (48T)</a></li>
+                      <li><a href="/products/used-volvo-ec210-excavator" className="hover:text-amber-500 transition-colors block py-0.5">EC210 (21T)</a></li>
+                      <li><a href="/products/used-volvo-ec300dl-excavator" className="hover:text-amber-500 transition-colors block py-0.5">EC300DL (30T)</a></li>
+                      <li><a href="/products/used-volvo-ec480-excavator" className="hover:text-amber-500 transition-colors block py-0.5">EC480 (48T)</a></li>
                     </ul>
                   </div>
 
