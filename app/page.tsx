@@ -136,8 +136,8 @@ export default function Page() {
                 Hot Seller
               </div>
               <img 
-                src="https://images.unsplash.com/photo-1579684389782-64d84b5e901a?q=80&w=800&auto=format&fit=crop" 
-                alt="Excavator Caterpillar" 
+                src="/images/cat-320d-excavator.webp" 
+                alt="Used Caterpillar 320D Excavator" 
                 className="w-full h-56 object-cover rounded-xl border border-gray-800 mb-4"
               />
               <div className="space-y-2">
