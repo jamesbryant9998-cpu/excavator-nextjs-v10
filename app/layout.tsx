@@ -52,69 +52,93 @@ export default function RootLayout({
                   </svg>
                 </button>
                 
-                {/* Mega Menu Grid Panel */}
-                <div className="absolute left-1/2 -translate-x-1/2 top-full hidden group-hover:grid grid-cols-2 gap-8 bg-[#111625]/95 border border-gray-800 rounded-2xl p-6 shadow-2xl w-[480px] z-50 backdrop-blur-md">
+                {/* Mega Menu Grid Panel - Redesigned by Brand */}
+                <div className="absolute left-1/2 -translate-x-1/2 top-full hidden group-hover:grid grid-cols-2 md:grid-cols-4 gap-6 bg-[#111625]/95 border border-gray-800 rounded-2xl p-6 shadow-2xl w-[90vw] max-w-[900px] z-50 backdrop-blur-md">
                   
-                  {/* Category Level 1: Crawler Heavy Excavators */}
-                  <div className="space-y-3 border-r border-gray-800/60 pr-4">
-                    <div className="flex items-center space-x-1.5 text-amber-500 font-extrabold tracking-wider text-xs">
-                      <HardHat size={14} />
-                      <span>CRAWLER EXCAVATORS</span>
-                    </div>
-                    
-                    <div className="space-y-4">
-                      {/* Brand Level 2: Caterpillar */}
-                      <div>
-                        <h4 className="text-[10px] font-black text-gray-500 uppercase tracking-wider mb-1.5">Caterpillar</h4>
-                        <ul className="space-y-1 text-xs text-gray-300">
-                          <li><a href="/products/cat-320d" className="hover:text-amber-500 transition-colors block py-0.5">CAT 320D Standard (21.5T)</a></li>
-                          <li><a href="/products/used-caterpillar-320d-excavator-premium" className="hover:text-amber-500 transition-colors block py-0.5">CAT 320D Premium (21.5T)</a></li>
-                          <li><a href="/products/used-caterpillar-320d-excavator-classic" className="hover:text-amber-500 transition-colors block py-0.5">CAT 320D Classic (21.5T)</a></li>
-                          <li><a href="/products/used-caterpillar-320d-excavator-pro" className="hover:text-amber-500 transition-colors block py-0.5">CAT 320D Power Pro (21.5T)</a></li>
-                          <li><a href="/products/used-caterpillar-312d-crawler-excavator-price" className="hover:text-amber-500 transition-colors block py-0.5">CAT 312D (12.8 Tons)</a></li>
-                          <li><a href="/products/heavy-used-cat-330d-excavator-specification" className="hover:text-amber-500 transition-colors block py-0.5">CAT 330D (29.8 Tons)</a></li>
-                          <li><a href="/products/used-caterpillar-336d-heavy-mining-excavator-sale" className="hover:text-amber-500 transition-colors block py-0.5">CAT 336D (36.2 Tons)</a></li>
-                          <li><a href="/products/large-used-caterpillar-349d-excavator-wholesale" className="hover:text-amber-500 transition-colors block py-0.5">CAT 349D (48.5 Tons)</a></li>
-                        </ul>
-                      </div>
-                      
-                      {/* Brand Level 2: Komatsu, Sany, Hitachi */}
-                      <div>
-                        <h4 className="text-[10px] font-black text-gray-500 uppercase tracking-wider mb-1.5">Other Heavy Brands</h4>
-                        <ul className="space-y-1 text-xs text-gray-300">
-                          <li><a href="/products/komatsu-pc200-8" className="hover:text-amber-500 transition-colors block py-0.5">Komatsu PC200-8</a></li>
-                          <li><a href="/products/sany-sy215c" className="hover:text-amber-500 transition-colors block py-0.5">Sany SY215C</a></li>
-                          <li><a href="/products/hitachi-zx200-3" className="hover:text-amber-500 transition-colors block py-0.5">Hitachi ZX200-3</a></li>
-                        </ul>
-                      </div>
-                    </div>
+                  {/* Brand 1: Caterpillar */}
+                  <div className="space-y-2">
+                    <h4 className="text-[10px] font-black text-amber-500 uppercase tracking-widest border-b border-gray-800 pb-1.5 mb-2">Caterpillar</h4>
+                    <ul className="space-y-1 text-xs text-gray-300">
+                      <li><a href="/#products" className="hover:text-amber-500 transition-colors block py-0.5">CAT 320D (21.5T)</a></li>
+                      <li><a href="/#products" className="hover:text-amber-500 transition-colors block py-0.5">CAT 336D (36T)</a></li>
+                      <li><a href="/#products" className="hover:text-amber-500 transition-colors block py-0.5">CAT 349D (48T)</a></li>
+                      <li><a href="/#products" className="text-gray-500 text-[10px] hover:text-amber-500 transition-colors">View All CAT →</a></li>
+                    </ul>
                   </div>
-                  
-                  {/* Category Level 1: Mini & Compact Excavators */}
-                  <div className="space-y-3">
-                    <div className="flex items-center space-x-1.5 text-amber-500 font-extrabold tracking-wider text-xs">
-                      <Compass size={14} />
-                      <span>MINI EXCAVATORS</span>
-                    </div>
-                    
-                    <div className="space-y-4">
-                      {/* Brand Level 2: Kubota */}
-                      <div>
-                        <h4 className="text-[10px] font-black text-gray-500 uppercase tracking-wider mb-1.5">Kubota</h4>
-                        <ul className="space-y-1 text-xs text-gray-300">
-                          <li><a href="/products/kubota-kx155" className="hover:text-amber-500 transition-colors block py-0.5">Kubota KX155 (5.5 Tons)</a></li>
-                        </ul>
-                      </div>
-                      
-                      {/* Brand Level 2: Caterpillar Compact */}
-                      <div>
-                        <h4 className="text-[10px] font-black text-gray-500 uppercase tracking-wider mb-1.5">Caterpillar Compact</h4>
-                        <ul className="space-y-1 text-xs text-gray-300">
-                          <li><a href="/products/used-caterpillar-3055e-mini-excavator-fob" className="hover:text-amber-500 transition-colors block py-0.5">CAT 305.5E (5.4 Tons)</a></li>
-                        </ul>
-                      </div>
-                    </div>
+
+                  {/* Brand 2: Komatsu */}
+                  <div className="space-y-2">
+                    <h4 className="text-[10px] font-black text-amber-500 uppercase tracking-widest border-b border-gray-800 pb-1.5 mb-2">Komatsu</h4>
+                    <ul className="space-y-1 text-xs text-gray-300">
+                      <li><a href="/#products" className="hover:text-amber-500 transition-colors block py-0.5">PC200-8 (20T)</a></li>
+                      <li><a href="/#products" className="hover:text-amber-500 transition-colors block py-0.5">PC220-8 (22T)</a></li>
+                      <li><a href="/#products" className="hover:text-amber-500 transition-colors block py-0.5">PC360-7 (35T)</a></li>
+                      <li><a href="/#products" className="text-gray-500 text-[10px] hover:text-amber-500 transition-colors">View All Komatsu →</a></li>
+                    </ul>
                   </div>
+
+                  {/* Brand 3: Doosan */}
+                  <div className="space-y-2">
+                    <h4 className="text-[10px] font-black text-amber-500 uppercase tracking-widest border-b border-gray-800 pb-1.5 mb-2">Doosan</h4>
+                    <ul className="space-y-1 text-xs text-gray-300">
+                      <li><a href="/#products" className="hover:text-amber-500 transition-colors block py-0.5">DX225LCA (22T)</a></li>
+                      <li><a href="/#products" className="hover:text-amber-500 transition-colors block py-0.5">DX300LC (30T)</a></li>
+                      <li><a href="/#products" className="hover:text-amber-500 transition-colors block py-0.5">DX500LC (50T)</a></li>
+                      <li><a href="/#products" className="text-gray-500 text-[10px] hover:text-amber-500 transition-colors">View All Doosan →</a></li>
+                    </ul>
+                  </div>
+
+                  {/* Brand 4: Hitachi */}
+                  <div className="space-y-2">
+                    <h4 className="text-[10px] font-black text-amber-500 uppercase tracking-widest border-b border-gray-800 pb-1.5 mb-2">Hitachi</h4>
+                    <ul className="space-y-1 text-xs text-gray-300">
+                      <li><a href="/#products" className="hover:text-amber-500 transition-colors block py-0.5">ZX200-3 (20T)</a></li>
+                      <li><a href="/#products" className="hover:text-amber-500 transition-colors block py-0.5">ZX350LCH (35T)</a></li>
+                      <li><a href="/#products" className="hover:text-amber-500 transition-colors block py-0.5">ZX470H (47T)</a></li>
+                      <li><a href="/#products" className="text-gray-500 text-[10px] hover:text-amber-500 transition-colors">View All Hitachi →</a></li>
+                    </ul>
+                  </div>
+
+                  {/* Brand 5: Sany */}
+                  <div className="space-y-2 pt-2">
+                    <h4 className="text-[10px] font-black text-amber-500 uppercase tracking-widest border-b border-gray-800 pb-1.5 mb-2">Sany</h4>
+                    <ul className="space-y-1 text-xs text-gray-300">
+                      <li><a href="/#products" className="hover:text-amber-500 transition-colors block py-0.5">SY215C (21.5T)</a></li>
+                      <li><a href="/#products" className="hover:text-amber-500 transition-colors block py-0.5">SY365H (36.5T)</a></li>
+                      <li><a href="/#products" className="hover:text-amber-500 transition-colors block py-0.5">SY485H (48.5T)</a></li>
+                    </ul>
+                  </div>
+
+                  {/* Brand 6: Hyundai */}
+                  <div className="space-y-2 pt-2">
+                    <h4 className="text-[10px] font-black text-amber-500 uppercase tracking-widest border-b border-gray-800 pb-1.5 mb-2">Hyundai</h4>
+                    <ul className="space-y-1 text-xs text-gray-300">
+                      <li><a href="/#products" className="hover:text-amber-500 transition-colors block py-0.5">R220LC-9 (22T)</a></li>
+                      <li><a href="/#products" className="hover:text-amber-500 transition-colors block py-0.5">R330LC-9 (33T)</a></li>
+                      <li><a href="/#products" className="hover:text-amber-500 transition-colors block py-0.5">R480LC-9 (48T)</a></li>
+                    </ul>
+                  </div>
+
+                  {/* Brand 7: Volvo */}
+                  <div className="space-y-2 pt-2">
+                    <h4 className="text-[10px] font-black text-amber-500 uppercase tracking-widest border-b border-gray-800 pb-1.5 mb-2">Volvo</h4>
+                    <ul className="space-y-1 text-xs text-gray-300">
+                      <li><a href="/#products" className="hover:text-amber-500 transition-colors block py-0.5">EC210D (21T)</a></li>
+                      <li><a href="/#products" className="hover:text-amber-500 transition-colors block py-0.5">EC380D (38T)</a></li>
+                      <li><a href="/#products" className="hover:text-amber-500 transition-colors block py-0.5">EC480D (48T)</a></li>
+                    </ul>
+                  </div>
+
+                  {/* Other / Mini */}
+                  <div className="space-y-2 pt-2">
+                    <h4 className="text-[10px] font-black text-gray-500 uppercase tracking-widest border-b border-gray-800 pb-1.5 mb-2">Others</h4>
+                    <ul className="space-y-1 text-xs text-gray-300">
+                      <li><a href="/#products" className="hover:text-amber-500 transition-colors block py-0.5">Kubota KX155 (5.5T)</a></li>
+                      <li><a href="/#products" className="hover:text-amber-500 transition-colors block py-0.5">Kobelco SK Series</a></li>
+                      <li><a href="/#products" className="hover:text-amber-500 transition-colors block py-0.5">Liugong Heavy Duty</a></li>
+                    </ul>
+                  </div>
+
                 </div>
               </div>
 
