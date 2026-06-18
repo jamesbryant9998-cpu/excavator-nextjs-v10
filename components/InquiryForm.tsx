@@ -37,7 +37,7 @@ export default function InquiryForm({ model, id }: { model: string; id: string }
           <label className="text-[10px] font-bold text-gray-500 uppercase">WhatsApp / Phone</label>
           <input 
             type="text" 
-            placeholder="e.g. +1 (555) 019-2834" 
+            placeholder="e.g. +8618949020107" 
             className="w-full bg-[#0b0f19] border border-gray-800 focus:border-amber-500 text-white rounded-lg px-3 py-2.5 text-xs focus:outline-none transition-colors"
           />
         </div>

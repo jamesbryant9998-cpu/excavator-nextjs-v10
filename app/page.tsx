@@ -410,8 +410,8 @@ export default function Page() {
 
           {/* Contact Direct Phone Info */}
           <div className="pt-4 border-t border-gray-900 grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs text-gray-500 text-center sm:text-left">
-            <span className="flex items-center justify-center sm:justify-start"><Phone size={14} className="text-amber-500 mr-2" /> Direct B2B Line: +86-138-xxxx-xxxx</span>
-            <span className="flex items-center justify-center sm:justify-start"><Mail size={14} className="text-amber-500 mr-2" /> Email: export@heavyexpo.com</span>
+            <span className="flex items-center justify-center sm:justify-start"><Phone size={14} className="text-amber-500 mr-2" /> Direct B2B Line: +8618949020107</span>
+            <span className="flex items-center justify-center sm:justify-start"><Mail size={14} className="text-amber-500 mr-2" /> Email: jamesbryant9998@gmail.com</span>
           </div>
         </div>
       </section>

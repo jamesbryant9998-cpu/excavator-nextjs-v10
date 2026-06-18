@@ -19,8 +19,8 @@ export default function RootLayout({
         <div className="hidden md:block bg-[#070b13] py-2 border-b border-gray-800 text-xs text-gray-400">
           <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
             <div className="flex items-center space-x-6">
-              <span className="flex items-center"><Phone size={13} className="text-amber-500 mr-2" /> +86-138-xxxx-xxxx</span>
-              <span className="flex items-center"><Mail size={13} className="text-amber-500 mr-2" /> export@heavyexpo.com</span>
+              <span className="flex items-center"><Phone size={13} className="text-amber-500 mr-2" /> +8618949020107</span>
+              <span className="flex items-center"><Mail size={13} className="text-amber-500 mr-2" /> jamesbryant9998@gmail.com</span>
               <span className="flex items-center"><Clock size={13} className="text-amber-500 mr-2" /> Hours: Mon-Sat 8:00 - 18:00 (UTC+8)</span>
             </div>
             <div className="flex items-center space-x-4">
