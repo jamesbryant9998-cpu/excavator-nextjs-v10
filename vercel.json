@@ -1,4 +1,5 @@
 {
-  "cleanUrls": false,
+  "framework": "nextjs",
+  "cleanUrls": true,
   "trailingSlash": false
 }
