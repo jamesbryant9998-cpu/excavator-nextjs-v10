@@ -194,6 +194,9 @@ export default function Page() {
                 <img 
                   src={p.image} 
                   alt={p.model} 
+                  width={400}
+                  height={300}
+                  loading="lazy"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
                 <div className="absolute bottom-3 left-3 bg-[#0b0f19]/80 backdrop-blur border border-gray-800 text-[10px] text-gray-300 font-extrabold px-2.5 py-1 rounded">

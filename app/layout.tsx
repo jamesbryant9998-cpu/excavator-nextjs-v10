@@ -14,6 +14,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
+      <head>
+        <link rel="preconnect" href="https://heavymachinerypro.com" />
+        <link rel="preconnect" href="https://wa.me" />
+        <link rel="dns-prefetch" href="https://wa.me" />
+      </head>
       <body className="flex flex-col min-h-screen bg-[#0b0f19] text-[#f3f4f6]">
         {/* Info Top Bar */}
         <div className="hidden md:block bg-[#070b13] py-2 border-b border-gray-800 text-xs text-gray-400">
