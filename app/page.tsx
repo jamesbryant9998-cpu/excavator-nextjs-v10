@@ -149,9 +149,9 @@ export default function Page() {
                   <span className="inline-flex items-center text-xs text-emerald-500 font-semibold">
                     <CheckCircle2 size={14} className="mr-1" /> Original Pump & Engine
                   </span>
-                  <a href="/products/cat-320d" className="text-xs text-amber-500 font-bold hover:underline inline-flex items-center">
+                  <Link href="/products/used-caterpillar-320d-excavator-premium" className="text-xs text-amber-500 font-bold hover:underline inline-flex items-center">
                     See Spec Sheet <ArrowRight size={12} className="ml-1" />
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
