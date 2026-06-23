@@ -11,7 +11,7 @@ interface PageProps {
 
 export default function Product({ params }: PageProps) {
   // Find product by slug
-  const product = productsData.find((p) => p.slug === params.slug);
+  const product: any = productsData.find((p) => p.slug === params.slug);
 
   // If product not found
   if (!product) {
@@ -163,6 +163,104 @@ export default function Product({ params }: PageProps) {
             <InquiryForm model={product.model} id={product.id} />
           </div>
         </div>
+      </div>
+    </div>
+  );
+}
+
+// Generate static params for Next.js static export compilation
+export async function generateStaticParams() {
+  return productsData.map((product) => ({
+    slug: product.slug,
+  }));
+}
+}
+            <div className="bg-[#111625]/40 border border-gray-800 rounded-3xl p-8 md:p-12 space-y-8">
+              <h2 className="text-2xl sm:text-3xl font-black text-white uppercase tracking-tight">
+                Product <span className="text-amber-500">Overview</span>
+              </h2>
+              <div 
+                className="text-gray-300 leading-relaxed text-sm md:text-base space-y-4 prose prose-invert max-w-none"
+                dangerouslySetInnerHTML={{ __html: product.longDescription }}
+              />
+            </div>
+
+            {/* 2. Technical Detail Images Grid */}
+            <div className="space-y-8">
+              <h2 className="text-2xl sm:text-3xl font-black text-white uppercase tracking-tight text-center">
+                Close-up <span className="text-amber-500">Mechanical Details</span>
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {product.detailImages?.map((img: string, idx: number) => (
+                  <div key={idx} className="bg-[#111625] border border-gray-800 rounded-3xl overflow-hidden group">
+                    <img 
+                      src={img} 
+                      alt={`${product.model} detail ${idx + 1}`} 
+                      className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {/* 3. Core Features Checklist */}
+              <div className="bg-[#111625] border border-gray-800 rounded-3xl p-8 space-y-6">
+                <h3 className="text-xl font-black text-white uppercase tracking-wider flex items-center">
+                  <Cpu size={20} className="text-amber-500 mr-2" /> Key Features
+                </h3>
+                <ul className="space-y-4">
+                  {product.features?.map((f: string, idx: number) => (
+                    <li key={idx} className="flex items-start text-xs md:text-sm text-gray-300">
+                      <div className="p-1 bg-amber-500/10 rounded mr-3 mt-0.5">
+                        <CheckCircle2 size={14} className="text-amber-500" />
+                      </div>
+                      <span>{f}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* 4. Why Choose HMP Section */}
+              <div className="bg-[#111625] border border-gray-800 rounded-3xl p-8 space-y-6">
+                <h3 className="text-xl font-black text-white uppercase tracking-wider flex items-center">
+                  <ShieldCheck size={20} className="text-amber-500 mr-2" /> Why Source From HMP?
+                </h3>
+                <ul className="space-y-4">
+                  {product.whyChooseUs?.map((item: string, idx: number) => (
+                    <li key={idx} className="flex items-start text-xs md:text-sm text-gray-300">
+                      <div className="p-1 bg-emerald-500/10 rounded mr-3 mt-0.5">
+                        <CheckCircle2 size={14} className="text-emerald-500" />
+                      </div>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            {/* 5. FAQ Section */}
+            <div className="bg-[#111625]/60 border border-gray-800/80 rounded-3xl p-8 md:p-12 space-y-10">
+              <h2 className="text-2xl sm:text-3xl font-black text-white uppercase tracking-tight">
+                Frequently <span className="text-amber-500">Asked Questions</span>
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                {product.faqs?.map((faq: any, idx: number) => (
+                  <div key={idx} className="space-y-3">
+                    <h4 className="text-sm font-black text-white flex items-center">
+                      <span className="w-6 h-6 rounded-full bg-amber-500 text-black flex items-center justify-center text-[10px] mr-2 shrink-0">Q</span>
+                      {faq.q}
+                    </h4>
+                    <p className="text-xs text-gray-400 leading-relaxed pl-8">
+                      {faq.a}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+          </div>
+        )}
       </div>
     </div>
   );

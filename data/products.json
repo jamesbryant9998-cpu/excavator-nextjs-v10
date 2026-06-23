@@ -13,7 +13,45 @@
     "power": "110 kW (148 HP)",
     "bucketCapacity": "1.0 m\u00b3",
     "undercarriage": "95% New",
-    "image": "/images/used-caterpillar-320d-excavator-premium.webp"
+    "image": "/images/used-caterpillar-320d-excavator-premium.webp",
+    "longDescription": "This immaculate 95% new <strong>used caterpillar-320d-excavator</strong> represents the absolute gold standard in the 20-ton class machinery market. Sourced directly from a low-hour project, this <strong>used caterpillar-320d-excavator</strong> has undergone a rigorous 120-point SGS health audit to ensure 100% factory performance. Buyers seeking a <strong>used caterpillar-320d-excavator</strong> with original Cat C6.4 ACERT engine and pristine hydraulic pumps will find this unit exceptional. Every detail of this <strong>used caterpillar-320d-excavator</strong>, from the reinforced boom to the immaculate operator cabin, is designed for maximum uptime on your construction site.",
+    "detailImages": [
+      "/images/cat-320d-detail-engine.webp",
+      "/images/cat-320d-detail-hydraulics.webp",
+      "/images/cat-320d-detail-cabin.webp",
+      "/images/cat-320d-detail-undercarriage.webp"
+    ],
+    "features": [
+      "Advanced Cat C6.4 ACERT Technology: Delivering 148 HP with optimized fuel density.",
+      "Patented Pilot-Operated Hydraulics: Providing unmatched coordination and grading precision.",
+      "Reinforced Mining-Grade Boom & Arm: Increased structural integrity for heavy rock breaking.",
+      "High-Pressure Common Rail Fuel System: Tolerance for varying diesel qualities in remote regions.",
+      "Digital Health Monitoring: Integrated diagnostics for real-time engine and pump telemetry."
+    ],
+    "whyChooseUs": [
+      "120-Point SGS Certified Inspection: We guarantee zero oil leaks and flawless cylinder response.",
+      "Direct Factory Yard Sourcing: Eliminating middlemen to provide the lowest wholesale FOB pricing.",
+      "Weekly Global Shipping Desk: Expert Flat Rack and Ro-Ro logistics to over 80 countries.",
+      "Authentic Spare Parts Guarantee: We only sell machines with 100% genuine major components."
+    ],
+    "faqs": [
+      {
+        "q": "What is the true operational hour count for this CAT 320D?",
+        "a": "This unit has 1,100 verified original hours. We verify hours through engine ECM analysis and physical wear checks on pins and bushings."
+      },
+      {
+        "q": "Do you provide an export mechanical health report?",
+        "a": "Yes, every machine comes with a detailed video walk-around and an SGS-standard certification report covering the engine, pump, and valve blocks."
+      },
+      {
+        "q": "What are the shipping options for my country?",
+        "a": "We offer 40HQ container (disassembled), Flat Rack, and Ro-Ro shipping. Our logistics desk provides a quote within 24 hours."
+      },
+      {
+        "q": "Is the paint original factory yellow?",
+        "a": "Yes, this unit retains its 100% original factory paint with zero touch-ups, indicating a well-sheltered maintenance history."
+      }
+    ]
   },
   {
     "id": "CAT012",
